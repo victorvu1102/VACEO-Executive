@@ -45,7 +45,7 @@ document.querySelector('.search-bar .btn-gold')?.addEventListener('click', () =>
 });
 
 // ===== SCROLL REVEAL =====
-const revealEls = document.querySelectorAll('.value-card, .eco-card, .alumni-card, .event-card');
+const revealEls = document.querySelectorAll('.value-card, .eco-card, .alumni-card, .event-card, .lecture-card, .case-card, .download-item');
 const revealObs = new IntersectionObserver((entries) => {
   entries.forEach((entry, i) => {
     if (entry.isIntersecting) {
