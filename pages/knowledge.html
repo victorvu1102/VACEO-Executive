@@ -1,0 +1,426 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Knowledge Hub – VACEO | Thư viện tri thức</title>
+  <meta name="description" content="Kho tàng tri thức quản trị, bài giảng video và tài liệu độc quyền dành cho CEO." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@300;400;500;600;700;800&family=Inter:wght@400;500;600&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="../css/style.css" />
+  <style>
+    /* Knowledge Hub Specific Styles */
+    .page-hero-light {
+      background: #fff;
+      padding: 8rem 0 4rem;
+      text-align: center;
+    }
+    .page-hero-light .section-label-gold { font-size: 0.75rem; font-weight: 700; color: var(--gold); text-transform: uppercase; letter-spacing: 0.15em; margin-bottom: 1rem; display: block; }
+    .page-hero-light h1 { font-family: 'Manrope', sans-serif; font-size: 3.5rem; font-weight: 800; color: var(--navy); margin-bottom: 1.5rem; }
+    .page-hero-light p { color: var(--on-surface-var); font-size: 1.1rem; max-width: 700px; margin: 0 auto 3rem; line-height: 1.6; }
+
+    /* Search Bar */
+    .search-wrapper {
+      max-width: 800px;
+      margin: 0 auto;
+      position: relative;
+      display: flex;
+      box-shadow: 0 15px 40px rgba(0,0,0,0.05);
+      border-radius: 12px;
+      overflow: hidden;
+      border: 1px solid rgba(0,0,0,0.05);
+    }
+    .search-wrapper input {
+      flex: 1;
+      padding: 1.5rem 2rem;
+      border: none;
+      outline: none;
+      font-size: 1rem;
+      color: var(--navy);
+    }
+    .search-wrapper button {
+      padding: 0 2.5rem;
+      background: var(--navy);
+      color: #fff;
+      border: none;
+      font-weight: 700;
+      cursor: pointer;
+      transition: var(--transition);
+    }
+    .search-wrapper button:hover { background: #0c1c36; }
+    .search-tags { margin-top: 1.5rem; display: flex; justify-content: center; gap: 1.5rem; }
+    .search-tags span { font-size: 0.75rem; color: var(--on-surface-var); opacity: 0.6; }
+    .search-tags a { font-size: 0.75rem; color: var(--navy); text-decoration: none; font-weight: 600; }
+    .search-tags a:hover { color: var(--gold); }
+
+    /* Filter Tabs */
+    .filter-tabs { display: flex; justify-content: center; gap: 1rem; margin: 4rem 0; }
+    .filter-tab {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+      padding: 0.75rem 1.5rem;
+      background: #fff;
+      border: 1px solid rgba(0,0,0,0.05);
+      border-radius: 10px;
+      font-size: 0.9rem;
+      font-weight: 700;
+      color: var(--on-surface-var);
+      cursor: pointer;
+      transition: var(--transition);
+    }
+    .filter-tab.active { background: var(--navy); color: #fff; border-color: var(--navy); box-shadow: 0 10px 20px rgba(10,29,55,0.1); }
+    .filter-tab svg { width: 18px; height: 18px; stroke: currentColor; fill: none; stroke-width: 2; }
+
+    /* Lecture Cards */
+    .lectures { padding: 4rem 0; }
+    .lecture-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 2rem; margin-top: 3rem; }
+    .lecture-card { background: #fff; border-radius: 1.5rem; overflow: hidden; border: 1px solid rgba(0,0,0,0.05); transition: var(--transition); }
+    .lecture-card:hover { transform: translateY(-10px); box-shadow: 0 20px 40px rgba(0,0,0,0.05); }
+    .lecture-img { height: 280px; background-size: cover; background-position: center; position: relative; }
+    .lecture-badge { position: absolute; top: 1.5rem; left: 1.5rem; background: var(--navy); color: #fff; font-size: 0.65rem; font-weight: 800; padding: 4px 12px; border-radius: 4px; text-transform: uppercase; letter-spacing: 0.05em; }
+    .lecture-content { padding: 2rem; }
+    .lecture-tags { display: flex; gap: 0.5rem; margin-bottom: 1rem; }
+    .lecture-tag { font-size: 0.7rem; font-weight: 800; color: var(--gold); text-transform: uppercase; letter-spacing: 0.05em; background: rgba(197,160,89,0.08); padding: 2px 8px; border-radius: 4px; }
+    .lecture-content h3 { font-family: 'Manrope', sans-serif; font-size: 1.4rem; font-weight: 800; color: var(--navy); margin-bottom: 1rem; line-height: 1.3; }
+    .lecture-content p { font-size: 0.9rem; color: var(--on-surface-var); line-height: 1.6; margin-bottom: 2rem; }
+    .lecture-footer { display: flex; justify-content: space-between; align-items: center; border-top: 1px solid rgba(0,0,0,0.05); pt: 1.5rem; padding-top: 1.5rem; }
+    .lecture-author { display: flex; align-items: center; gap: 0.75rem; }
+    .author-av { width: 40px; height: 40px; border-radius: 50%; overflow: hidden; }
+    .author-av img { width: 100%; height: 100%; object-fit: cover; }
+    .author-info strong { display: block; font-size: 0.85rem; color: var(--navy); }
+    .author-info span { font-size: 0.75rem; color: var(--on-surface-var); opacity: 0.7; }
+    .lecture-actions { display: flex; gap: 1rem; }
+    .action-icon { color: var(--navy); opacity: 0.4; transition: var(--transition); cursor: pointer; }
+    .action-icon:hover { opacity: 1; color: var(--gold); }
+
+    /* Exclusive Banner */
+    .exclusive-banner {
+      background: var(--navy);
+      background-image: linear-gradient(rgba(6, 14, 32, 0.9), rgba(6, 14, 32, 0.9)), url('https://images.unsplash.com/photo-1497366216548-37526070297c?auto=format&fit=crop&q=80&w=1000');
+      background-size: cover;
+      background-position: center;
+      border-radius: 2rem;
+      padding: 4rem;
+      color: #fff;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin: 4rem 0;
+      position: relative;
+      overflow: hidden;
+    }
+    .exclusive-banner::after {
+      content: '';
+      position: absolute;
+      right: 5%;
+      top: 50%;
+      transform: translateY(-50%);
+      width: 120px;
+      height: 120px;
+      background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='white' stroke-width='1' stroke-linecap='round' stroke-linejoin='round'%3E%3Crect x='3' y='11' width='18' height='11' rx='2' ry='2'%3E%3C/rect%3E%3Cpath d='M7 11V7a5 5 0 0 1 10 0v4'%3E%3C/path%3E%3C/svg%3E") no-repeat center;
+      opacity: 0.1;
+    }
+    .exclusive-text h2 { font-family: 'Manrope', sans-serif; font-size: 1.8rem; font-weight: 800; margin-bottom: 1rem; }
+    .exclusive-text p { color: rgba(255,255,255,0.6); max-width: 500px; line-height: 1.6; margin-bottom: 2rem; }
+    .exclusive-btns { display: flex; gap: 1rem; }
+
+    /* Case Studies */
+    .case-studies { padding: 4rem 0; }
+    .case-grid { display: grid; grid-template-columns: 2fr 1fr; gap: 2rem; margin-top: 3rem; }
+    .case-card-main { background: #fff; border: 1px solid rgba(0,0,0,0.05); border-radius: 1.5rem; padding: 3rem; display: flex; flex-direction: column; }
+    .case-card-small { background: #fff; border: 1px solid rgba(0,0,0,0.05); border-radius: 1.5rem; padding: 2rem; margin-bottom: 2rem; }
+    .case-badge { font-size: 0.65rem; font-weight: 800; color: var(--gold); text-transform: uppercase; margin-bottom: 1.5rem; display: block; }
+    .case-card-main h3 { font-family: 'Manrope', sans-serif; font-size: 1.6rem; font-weight: 800; color: var(--navy); margin-bottom: 1rem; }
+    .case-card-main p { color: var(--on-surface-var); line-height: 1.6; margin-bottom: 2rem; }
+    .case-footer { display: flex; justify-content: space-between; align-items: center; margin-top: auto; }
+    .student-avatars { display: flex; }
+    .student-avatars img { width: 32px; height: 32px; border-radius: 50%; border: 2px solid #fff; margin-left: -8px; }
+    .student-avatars img:first-child { margin-left: 0; }
+    .student-count { font-size: 0.75rem; color: var(--on-surface-var); margin-left: 0.5rem; font-weight: 600; }
+
+    /* Download List */
+    .downloads { padding: 4rem 0 8rem; }
+    .download-list { list-style: none; padding: 0; }
+    .download-item {
+      background: #fff;
+      padding: 1.5rem 2rem;
+      border: 1px solid rgba(0,0,0,0.04);
+      border-radius: 1rem;
+      margin-bottom: 1rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      transition: var(--transition);
+    }
+    .download-item:hover { border-color: var(--gold); transform: translateX(10px); }
+    .download-info { display: flex; align-items: center; gap: 1.5rem; }
+    .file-icon { width: 48px; height: 48px; background: #f8fafc; border-radius: 10px; display: flex; align-items: center; justify-content: center; font-weight: 800; font-size: 0.75rem; }
+    .file-icon.pdf { color: #e11d48; background: #fff1f2; }
+    .file-icon.xls { color: #16a34a; background: #f0fdf4; }
+    .download-text h4 { font-size: 1rem; color: var(--navy); margin-bottom: 0.25rem; }
+    .download-text p { font-size: 0.75rem; color: var(--on-surface-var); opacity: 0.6; }
+
+    /* Stats Bar */
+    .knowledge-stats { background: #fcfdfe; padding: 4rem 0; border-top: 1px solid rgba(0,0,0,0.05); }
+    .k-stats-grid { display: grid; grid-template-columns: repeat(4, 1fr); text-align: center; }
+    .k-stat-item h4 { font-family: 'Manrope', sans-serif; font-size: 2rem; font-weight: 800; color: var(--navy); margin-bottom: 0.25rem; }
+    .k-stat-item p { font-size: 0.75rem; font-weight: 700; color: var(--on-surface-var); text-transform: uppercase; letter-spacing: 0.1em; opacity: 0.6; }
+
+    @media(max-width:992px) {
+      .lecture-grid, .case-grid, .k-stats-grid { grid-template-columns: 1fr; }
+      .exclusive-banner { flex-direction: column; text-align: center; gap: 2rem; }
+    }
+  </style>
+</head>
+<body>
+  <nav id="navbar">
+    <div class="nav-inner">
+      <a href="../index.html" class="logo">
+        <img src="../assets/img/logo.png" alt="VACEO Logo" class="logo-img">
+      </a>
+      <ul class="nav-links">
+        <li><a href="../index.html" class="nav-link">Trang chủ</a></li>
+        <li><a href="legacy.html" class="nav-link">Legacy</a></li>
+        <li><a href="knowledge.html" class="nav-link active">Knowledge Hub</a></li>
+        <li><a href="alumni.html" class="nav-link">Alumni</a></li>
+        <li><a href="cooperation.html" class="nav-link">Hợp tác</a></li>
+        <li><a href="news.html" class="nav-link">Tin tức</a></li>
+      </ul>
+      <div class="nav-actions">
+        <a href="#" class="btn-outline-nav">Đăng nhập</a>
+      </div>
+      <button class="mobile-toggle" id="mobileToggle"><span></span><span></span><span></span></button>
+    </div>
+  </nav>
+
+  <section class="page-hero-light">
+    <div class="container">
+      <span class="section-label-gold">KNOWLEDGE REPOSITORY</span>
+      <h1>Thư viện Tri thức</h1>
+      <p>Truy cập hàng ngàn tài liệu chuyên sâu, bài giảng độc quyền và các nghiên cứu điển hình từ mạng lưới lãnh đạo cao cấp VCCI-Andrews.</p>
+      
+      <div class="search-wrapper">
+        <input type="text" placeholder="Tìm tài liệu, bài giảng, case study...">
+        <button>Tìm kiếm</button>
+      </div>
+      <div class="search-tags">
+        <span>Xu hướng:</span>
+        <a href="#">Digital Transformation</a>
+        <a href="#">ESG Framework</a>
+        <a href="#">Supply Chain 2024</a>
+      </div>
+    </div>
+  </section>
+
+  <section class="container">
+    <div class="filter-tabs">
+      <button class="filter-tab">
+        <svg viewBox="0 0 24 24"><polygon points="5 3 19 12 5 21 5 3"></polygon></svg>
+        Bài giảng
+      </button>
+      <button class="filter-tab active">
+        <svg viewBox="0 0 24 24"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"></path><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"></path></svg>
+        Case Study học viên
+      </button>
+      <button class="filter-tab">
+        <svg viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline><line x1="16" y1="13" x2="8" y2="13"></line><line x1="16" y1="17" x2="8" y2="17"></line><polyline points="10 9 9 9 8 9"></polyline></svg>
+        Tài liệu học tập
+      </button>
+    </div>
+  </section>
+
+  <section class="lectures">
+    <div class="container">
+      <div style="display: flex; justify-content: space-between; align-items: flex-end; margin-bottom: 2rem;">
+        <div>
+          <h2 class="section-title" style="margin: 0;">Bài giảng chọn lọc</h2>
+          <p style="margin-top: 0.5rem; color: var(--on-surface-var);">Kiến thức nền tảng và nâng cao từ đội ngũ giảng viên quốc tế.</p>
+        </div>
+        <a href="#" class="eco-link">Xem tất cả →</a>
+      </div>
+      <div class="lecture-grid">
+        <div class="lecture-card">
+          <div class="lecture-img" style="background-image: url('https://images.unsplash.com/photo-1460925895917-afdab827c52f?auto=format&fit=crop&q=80&w=1000');">
+            <span class="lecture-badge">LECTURE</span>
+          </div>
+          <div class="lecture-content">
+            <div class="lecture-tags">
+              <span class="lecture-tag">STRATEGY</span>
+              <span class="lecture-tag">DIGITAL</span>
+            </div>
+            <h3>Chiến lược Tăng trưởng Bền vững trong Kỷ nguyên Số</h3>
+            <p>Phân tích các mô hình kinh doanh thích ứng và bền vững trong thị trường Việt Nam hiện nay.</p>
+            <div class="lecture-footer">
+              <div class="lecture-author">
+                <div class="author-av"><img src="../assets/img/alumni_portraits_3_1778224567337.png" alt="Dr. Robert Chen"></div>
+                <div class="author-info">
+                  <strong>Dr. Robert Chen</strong>
+                  <span>Senior Advisor</span>
+                </div>
+              </div>
+              <div class="lecture-actions">
+                <span class="action-icon">👁</span>
+                <span class="action-icon">⬇</span>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="lecture-card">
+          <div class="lecture-img" style="background-image: url('https://images.unsplash.com/photo-1552664730-d307ca884978?auto=format&fit=crop&q=80&w=1000');">
+            <span class="lecture-badge">REPORT</span>
+          </div>
+          <div class="lecture-content">
+            <div class="lecture-tags">
+              <span class="lecture-tag">LEADERSHIP</span>
+              <span class="lecture-tag">MINDFULNESS</span>
+            </div>
+            <h3>Lãnh đạo Tỉnh thức: Từ Tư duy đến Hành động</h3>
+            <p>Cách thức xây dựng văn hóa doanh nghiệp dựa trên sự thấu cảm và hiệu quả công việc vượt trội.</p>
+            <div class="lecture-footer">
+              <div class="lecture-author">
+                <div class="author-av"><img src="../assets/img/alumni_portraits_5_1778224606368.png" alt="Ms. Anh Nguyễn"></div>
+                <div class="author-info">
+                  <strong>Ms. Anh Nguyễn</strong>
+                  <span>Executive Coach</span>
+                </div>
+              </div>
+              <div class="lecture-actions">
+                <span class="action-icon">👁</span>
+                <span class="action-icon">⬇</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="exclusive-banner">
+        <div class="exclusive-text">
+          <span class="section-label-gold" style="color: var(--gold);">EXCLUSIVE ACCESS</span>
+          <h2>Tài liệu dành riêng cho Thành viên</h2>
+          <p>Mở khóa các báo cáo thị trường độc quyền, các case study bảo mật và chuỗi video đào tạo chuyên sâu từ các chuyên gia hàng đầu thế giới.</p>
+          <div class="exclusive-btns">
+            <a href="../index.html#join" class="btn-gold">Nâng cấp Hội viên</a>
+            <a href="#" class="btn-outline" style="border-color: #fff; color: #fff;">Tìm hiểu tài liệu</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="case-studies">
+    <div class="container">
+      <h2 class="section-title">Case Study học viên</h2>
+      <p class="section-sub">Những bài học thực tế từ chính hành trình chuyển đổi của các lãnh đạo trong mạng lưới.</p>
+      <div class="case-grid">
+        <div class="case-card-main">
+          <span class="case-badge">FEATURED CASE STUDY</span>
+          <h3>Tái cấu trúc Chuỗi cung ứng: Bài học từ tập đoàn X-Logistics</h3>
+          <p>Làm thế nào một doanh nghiệp logistics truyền thống đã chuyển mình thành công nhờ mô hình data-driven chỉ trong 18 tháng.</p>
+          <div class="case-footer">
+            <div class="student-avatars">
+              <img src="../assets/img/alumni_portraits_1_1778224452143.png" alt="Student">
+              <img src="../assets/img/alumni_portraits_2_1778224551134.png" alt="Student">
+              <span class="student-count">+4</span>
+            </div>
+            <a href="#" class="btn-navy" style="font-size: 0.8rem; padding: 0.75rem 1.5rem;">Chi tiết Case Study</a>
+          </div>
+        </div>
+        <div class="case-sidebar">
+          <div class="case-card-small">
+            <span class="case-badge">CASE STUDY</span>
+            <h4 style="font-size: 1rem; color: var(--navy); margin-bottom: 0.5rem;">Chuyển đổi văn hóa tại TechCorp</h4>
+            <p style="font-size: 0.85rem; color: var(--on-surface-var); line-height: 1.5;">Xây dựng đội ngũ gắn kết thông qua các giá trị cốt lõi mới.</p>
+          </div>
+          <div class="case-card-small">
+            <span class="case-badge">CASE STUDY</span>
+            <h4 style="font-size: 1rem; color: var(--navy); margin-bottom: 0.5rem;">Tài chính cho Start-up quy mô lớn</h4>
+            <p style="font-size: 0.85rem; color: var(--on-surface-var); line-height: 1.5;">Quy trình gọi vốn Series B và quản trị dòng tiền hiệu quả.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="downloads">
+    <div class="container">
+      <h2 class="section-title">Tài liệu tham khảo</h2>
+      <p class="section-sub">Báo cáo, biểu mẫu và các tài liệu hướng dẫn nhanh.</p>
+      <ul class="download-list">
+        <li class="download-item">
+          <div class="download-info">
+            <div class="file-icon pdf">PDF</div>
+            <div class="download-text">
+              <h4>Khung năng lực lãnh đạo 4.0</h4>
+              <p>PDF • 2.4 MB • Cập nhật 2 tuần trước</p>
+            </div>
+          </div>
+          <span class="action-icon">⬇</span>
+        </li>
+        <li class="download-item">
+          <div class="download-info">
+            <div class="file-icon xls">XLS</div>
+            <div class="download-text">
+              <h4>Mẫu kế hoạch kinh doanh tinh gọn</h4>
+              <p>Excel • 1.1 MB • Đã tải 1,240 lần</p>
+            </div>
+          </div>
+          <span class="action-icon">⬇</span>
+        </li>
+        <li class="download-item">
+          <div class="download-info">
+            <div class="file-icon pdf">PDF</div>
+            <div class="download-text">
+              <h4>Bảng cân đối kế toán tài chính mẫu</h4>
+              <p>PDF • 1.8 MB • Chuẩn quốc tế IFRS</p>
+            </div>
+          </div>
+          <span class="action-icon">⬇</span>
+        </li>
+      </ul>
+    </div>
+  </section>
+
+  <section class="knowledge-stats">
+    <div class="container">
+      <div class="k-stats-grid">
+        <div class="k-stat-item">
+          <h4>5,000+</h4>
+          <p>Tài liệu số</p>
+        </div>
+        <div class="k-stat-item">
+          <h4>120+</h4>
+          <p>Giảng viên</p>
+        </div>
+        <div class="k-stat-item">
+          <h4>850+</h4>
+          <p>Case Studies</p>
+        </div>
+        <div class="k-stat-item">
+          <h4>15k+</h4>
+          <p>Học viên</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-grid">
+        <div class="footer-brand">
+          <div class="footer-logo">
+            <img src="../assets/img/logo.png" alt="VACEO Logo" class="footer-logo-img">
+          </div>
+          <p>Mạng lưới kết nối CEO VCCI-Andrews – Nơi hội tụ các nhà lãnh đạo bản lĩnh.</p>
+          <div class="footer-socials"><a href="#" class="social-btn">f</a><a href="#" class="social-btn">in</a><a href="#" class="social-btn">▶</a></div>
+        </div>
+        <div class="footer-col"><h4>Liên kết nhanh</h4><ul><li><a href="../index.html">Trang chủ</a></li><li><a href="alumni.html">Alumni</a></li><li><a href="knowledge.html" class="active">Knowledge Hub</a></li><li><a href="news.html">Tin tức & Sự kiện</a></li></ul></div>
+        <div class="footer-col"><h4>Chính sách</h4><ul><li><a href="#">Liên hệ</a></li><li><a href="#">Chính sách bảo mật</a></li><li><a href="#">Điều khoản sử dụng</a></li></ul></div>
+        <div class="footer-col"><h4>Thông tin liên hệ</h4><ul class="contact-list"><li>📍 Số 9 Đào Duy Anh, Đống Đa, Hà Nội</li><li>📞 024. 1234. 5678</li><li>✉️ info@vaceo.vn</li></ul></div>
+      </div>
+      <div class="footer-bottom"><p>© 2024 VACEO – VCCI Andrews Executive Network. All rights reserved.</p></div>
+    </div>
+  </footer>
+  <script src="../js/main.js"></script>
+</body>
+</html>

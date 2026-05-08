@@ -1,0 +1,324 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Legacy – VACEO | VCCI-Andrews</title>
+  <meta name="description" content="Hành trình hợp tác chiến lược đào tạo lãnh đạo giữa VCCI và Đại học Andrews, Hoa Kỳ." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@300;400;500;600;700;800&family=Inter:wght@400;500;600&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="../css/style.css" />
+  <style>
+    /* Global styles for this page */
+    .section-label-gold { font-size: 0.75rem; font-weight: 700; color: var(--gold); text-transform: uppercase; letter-spacing: 0.15em; margin-bottom: 1rem; display: block; }
+    
+    /* Page hero */
+    .page-hero {
+      min-height: 90vh;
+      background: linear-gradient(rgba(255,255,255, 0.7), rgba(255,255,255, 0.7)), url('../assets/img/hero_bg.png');
+      background-size: cover;
+      background-position: center;
+      display: flex;
+      align-items: center;
+      padding-top: 80px;
+      position: relative;
+    }
+    .hero-grid { display: grid; grid-template-columns: 1.2fr 0.8fr; gap: 4rem; align-items: center; width: 100%; }
+    .hero-text { text-align: left; }
+    .hero-text .page-hero-title { color: var(--navy); font-size: 3.5rem; margin-bottom: 1.5rem; line-height: 1.1; font-weight: 800; }
+    .hero-text .page-hero-sub { color: var(--on-surface-var); margin: 0 0 2.5rem 0; font-size: 1.1rem; max-width: 600px; line-height: 1.6; }
+    
+    /* Floating Stats Card */
+    .hero-stats-card {
+      background: #fff;
+      border-radius: 2rem;
+      padding: 3rem;
+      box-shadow: 0 20px 60px rgba(10,29,55,0.1);
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 2rem;
+    }
+    .hero-stat-item { text-align: left; }
+    .hero-stat-item h4 { font-family: 'Manrope', sans-serif; font-size: 2.2rem; font-weight: 800; color: var(--navy); margin-bottom: 0.25rem; }
+    .hero-stat-item p { font-size: 0.75rem; color: var(--on-surface-var); font-weight: 700; text-transform: uppercase; letter-spacing: 0.1em; }
+
+    /* Partnership Section */
+    .partnership { padding: 8rem 0; text-align: center; }
+    .partnership .section-title { font-size: 2.5rem; margin-bottom: 1rem; }
+    .partnership .section-sub { max-width: 700px; margin: 0 auto 4rem; color: var(--on-surface-var); }
+    .partners-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 2rem; margin-top: 3rem; }
+    .partner-card {
+      background: #fff;
+      padding: 4rem 2rem;
+      border: 1px solid rgba(0,0,0,0.05);
+      border-radius: 1.5rem;
+      transition: var(--transition);
+      text-align: center;
+    }
+    .partner-card:hover { transform: translateY(-10px); box-shadow: 0 20px 40px rgba(0,0,0,0.05); }
+    .partner-icon {
+      width: 80px;
+      height: 80px;
+      background: #f8fafc;
+      margin: 0 auto 2rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: 1rem;
+      overflow: hidden;
+    }
+    .partner-icon img { width: 40px; height: 40px; object-fit: contain; filter: grayscale(1); opacity: 0.7; transition: var(--transition); }
+    .partner-card:hover .partner-icon img { filter: grayscale(0); opacity: 1; }
+    .partner-card h3 { font-family: 'Manrope', sans-serif; font-size: 1.25rem; font-weight: 700; color: var(--navy); margin-bottom: 1rem; }
+    .partner-card p { font-size: 0.9rem; color: var(--on-surface-var); line-height: 1.7; }
+
+    /* Program Section */
+    .programs { padding: 8rem 0; background: #fcfdfe; }
+    .programs-header { display: flex; justify-content: space-between; align-items: flex-end; margin-bottom: 4rem; }
+    .program-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 2rem; }
+    .program-card {
+      background: #fff;
+      border-radius: 2rem;
+      overflow: hidden;
+      display: flex;
+      box-shadow: 0 15px 40px rgba(0,0,0,0.03);
+    }
+    .program-img { width: 40%; background-size: cover; background-position: center; }
+    .program-content { flex: 1; padding: 3rem; }
+    .program-badge { display: inline-block; font-size: 0.7rem; font-weight: 800; color: var(--gold); text-transform: uppercase; letter-spacing: 0.1em; margin-bottom: 1rem; }
+    .program-content h3 { font-family: 'Manrope', sans-serif; font-size: 1.5rem; font-weight: 800; color: var(--navy); margin-bottom: 1rem; }
+    .program-content p { font-size: 0.9rem; color: var(--on-surface-var); line-height: 1.7; margin-bottom: 1.5rem; }
+    .program-list { list-style: none; margin-bottom: 2rem; padding: 0; }
+    .program-list li { font-size: 0.85rem; margin-bottom: 0.75rem; display: flex; gap: 0.75rem; align-items: center; color: var(--on-surface-var); font-weight: 600; }
+    .program-list li::before { content: '✓'; color: var(--gold); font-weight: 900; }
+    
+    .program-card-dark { background: var(--navy); color: #fff; }
+    .program-card-dark .program-content { padding: 3rem; }
+    .program-card-dark h3 { color: #fff; }
+    .program-card-dark p { color: rgba(255,255,255,0.7); }
+    .sub-program-list { display: flex; flex-direction: column; gap: 1rem; }
+    .sub-program-item { background: rgba(255,255,255,0.05); padding: 1.25rem; border-radius: 1rem; border: 1px solid rgba(255,255,255,0.1); }
+    .sub-program-item h4 { font-size: 1rem; margin-bottom: 0.25rem; color: #fff; }
+    .sub-program-item p { font-size: 0.8rem; color: rgba(255,255,255,0.6); margin: 0; }
+
+    /* Faculty Section */
+    .faculty { padding: 8rem 0; text-align: center; }
+    .faculty-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 2rem; margin-top: 4rem; }
+    .faculty-card { text-align: center; }
+    .faculty-img {
+      width: 100%;
+      aspect-ratio: 4/5;
+      border-radius: 1.5rem;
+      overflow: hidden;
+      margin-bottom: 1.5rem;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.05);
+    }
+    .faculty-img img { width: 100%; height: 100%; object-fit: cover; transition: var(--transition); }
+    .faculty-card:hover .faculty-img img { transform: scale(1.05); }
+    .faculty-card h4 { font-family: 'Manrope', sans-serif; font-size: 1.1rem; font-weight: 700; color: var(--navy); margin-bottom: 0.25rem; }
+    .faculty-card p.title { font-size: 0.75rem; color: var(--gold); font-weight: 700; text-transform: uppercase; margin-bottom: 0.75rem; letter-spacing: 0.05em; }
+    .faculty-card p.desc { font-size: 0.85rem; color: var(--on-surface-var); line-height: 1.5; }
+
+    @media(max-width:992px) {
+      .hero-grid, .partners-grid, .program-grid, .faculty-grid { grid-template-columns: 1fr; }
+      .program-card { flex-direction: column; }
+      .program-img { width: 100%; height: 250px; }
+      .hero-text { text-align: center; }
+      .hero-text .page-hero-sub { margin-left: auto; margin-right: auto; }
+      .programs-header { flex-direction: column; align-items: flex-start; gap: 2rem; }
+    }
+  </style>
+</head>
+<body>
+  <nav id="navbar">
+    <div class="nav-inner">
+      <a href="../index.html" class="logo">
+        <img src="../assets/img/logo.png" alt="VACEO Logo" class="logo-img">
+      </a>
+      <ul class="nav-links">
+        <li><a href="../index.html" class="nav-link">Trang chủ</a></li>
+        <li><a href="legacy.html" class="nav-link active">Legacy</a></li>
+        <li><a href="knowledge.html" class="nav-link">Knowledge Hub</a></li>
+        <li><a href="alumni.html" class="nav-link">Alumni</a></li>
+        <li><a href="cooperation.html" class="nav-link">Hợp tác</a></li>
+        <li><a href="news.html" class="nav-link">Tin tức</a></li>
+      </ul>
+      <div class="nav-actions">
+        <a href="#" class="btn-outline-nav">Đăng nhập</a>
+      </div>
+      <button class="mobile-toggle" id="mobileToggle"><span></span><span></span><span></span></button>
+    </div>
+  </nav>
+
+  <section class="page-hero">
+    <div class="container">
+      <div class="hero-grid">
+        <div class="hero-text">
+          <span class="section-label-gold">EXCELLENCE IN EXECUTIVE LEADERSHIP</span>
+          <h1 class="page-hero-title">VCCI - Andrews Legacy:<br>Tinh hoa lãnh đạo</h1>
+          <p class="page-hero-sub">Sự hợp tác chiến lược giữa VCCI và Đại học Andrews (Hoa Kỳ) mang đến chương trình đào tạo đẳng cấp quốc tế, kiến tạo di sản cho các nhà điều hành Việt Nam.</p>
+          <div class="hero-btns">
+            <a href="#programs" class="btn-gold" style="padding: 1rem 2rem;">Khám phá chương trình</a>
+            <a href="../index.html#consultation" class="btn-outline" style="border-color: var(--navy); color: var(--navy); margin-left: 1rem; padding: 1rem 2rem;">Đăng ký tư vấn</a>
+          </div>
+        </div>
+        <div class="hero-stats-card">
+          <div class="hero-stat-item">
+            <h4>15+</h4>
+            <p>Năm hợp tác</p>
+          </div>
+          <div class="hero-stat-item">
+            <h4>500+</h4>
+            <p>Alumni Lãnh đạo</p>
+          </div>
+          <div class="hero-stat-item">
+            <h4>100%</h4>
+            <p>Bằng cấp Mỹ</p>
+          </div>
+          <div class="hero-stat-item">
+            <h4>Top 3</h4>
+            <p>Chương trình MBA</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="partnership">
+    <div class="container">
+      <span class="section-label-gold">PARTNERSHIP</span>
+      <h2 class="section-title">Nền tảng của sự xuất sắc</h2>
+      <p class="section-sub">VCCI-Andrews Legacy là kết quả của sự kết hợp giữa uy tín quốc gia và học thuật quốc tế.</p>
+      <div class="partners-grid">
+        <div class="partner-card">
+          <div class="partner-icon">
+            <img src="../assets/img/logo.png" alt="Andrews University">
+          </div>
+          <h3>Andrews University</h3>
+          <p>Thành lập từ 1874, là một trong những đại học uy tín nhất Hoa Kỳ với các chứng nhận kiểm định chất lượng giáo dục khắt khe nhất thế giới.</p>
+        </div>
+        <div class="partner-card">
+          <div class="partner-icon">
+            <img src="../assets/img/logo.png" alt="VCCI">
+          </div>
+          <h3>VCCI</h3>
+          <p>Liên đoàn Thương mại và Công nghiệp Việt Nam, cầu nối quan trọng thúc đẩy sự phát triển của cộng đồng doanh nghiệp và lãnh đạo tại Việt Nam.</p>
+        </div>
+        <div class="partner-card">
+          <div class="partner-icon">
+            <img src="../assets/img/logo.png" alt="Mạng lưới Legacy">
+          </div>
+          <h3>Mạng lưới Legacy</h3>
+          <p>Sự kết nối vượt thời gian giữa các thế hệ lãnh đạo, tạo nên một cộng đồng trí thức và cơ hội hợp tác không giới hạn trên toàn cầu.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="programs" id="programs">
+    <div class="container">
+      <div class="programs-header">
+        <div class="header-left">
+          <span class="section-label-gold">ACADEMIC EXCELLENCE</span>
+          <h2 class="section-title" style="margin: 0.5rem 0 0 0;">Chương trình đào tạo tinh hoa</h2>
+          <p style="margin-top: 1rem; color: var(--on-surface-var);">Các chương trình được thiết kế đặc biệt để phát triển tư duy chiến lược và năng lực điều hành thực chiến cho các quản lý cấp cao.</p>
+        </div>
+        <a href="#" class="btn-navy">Tải Brochure Toàn Diện</a>
+      </div>
+      <div class="program-grid">
+        <div class="program-card">
+          <div class="program-img" style="background-image: url('https://images.unsplash.com/photo-1517245386807-bb43f82c33c4?auto=format&fit=crop&q=80&w=1000');"></div>
+          <div class="program-content">
+            <span class="program-badge">MASTER PROGRAM</span>
+            <h3>MBA Andrews</h3>
+            <p>Chương trình Thạc sĩ Quản trị Kinh doanh chính quy từ Hoa Kỳ, tập trung vào thực tiễn kinh doanh toàn cầu.</p>
+            <ul class="program-list">
+              <li>Bằng cấp giá trị toàn cầu</li>
+              <li>Giảng viên từ Andrews University</li>
+            </ul>
+            <a href="#" class="eco-link">Chi tiết chương trình MBA →</a>
+          </div>
+        </div>
+        <div class="program-card program-card-dark">
+          <div class="program-content">
+            <span class="program-badge">EXECUTIVE EDUCATION</span>
+            <h3>Leadership Certificates</h3>
+            <p>Các khóa đào tạo chuyên sâu ngắn hạn giúp cập nhật những xu hướng và kỹ năng quản trị mới nhất.</p>
+            <div class="sub-program-list">
+              <div class="sub-program-item">
+                <h4>Quản trị Chiến lược</h4>
+                <p>Định tầm nhìn và lộ trình phát triển.</p>
+              </div>
+              <div class="sub-program-item">
+                <h4>Tài chính cho Lãnh đạo</h4>
+                <p>Công cụ tài chính cho nhà điều hành non-finance.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="faculty">
+    <div class="container">
+      <span class="section-label-gold">EXPERT FACULTY</span>
+      <h2 class="section-title">Hội đồng giảng viên quốc tế</h2>
+      <p class="section-sub">Đội ngũ chuyên gia giàu kinh nghiệm thực tiễn và nền tảng học thuật vững chắc từ các trường đại học hàng đầu thế giới.</p>
+      <div class="faculty-grid">
+        <div class="faculty-card">
+          <div class="faculty-img">
+            <img src="../assets/img/alumni_portraits_1_1778224452143.png" alt="Prof. Johnathan Miller">
+          </div>
+          <h4>Prof. Johnathan Miller</h4>
+          <p class="title">Dean of Business</p>
+          <p class="desc">Expert in Strategic Management and Global Corporate Governance.</p>
+        </div>
+        <div class="faculty-card">
+          <div class="faculty-img">
+            <img src="../assets/img/alumni_portraits_2_1778224551134.png" alt="Dr. Elena Rodriguez">
+          </div>
+          <h4>Dr. Elena Rodriguez</h4>
+          <p class="title">Innovation Lead</p>
+          <p class="desc">Specializing in Digital Transformation and Organizational Change.</p>
+        </div>
+        <div class="faculty-card">
+          <div class="faculty-img">
+            <img src="../assets/img/alumni_portraits_3_1778224567337.png" alt="Dr. Robert Chen">
+          </div>
+          <h4>Dr. Robert Chen</h4>
+          <p class="title">Finance Professor</p>
+          <p class="desc">Global Finance Markets and Investment Strategic Advisor.</p>
+        </div>
+        <div class="faculty-card">
+          <div class="faculty-img">
+            <img src="../assets/img/alumni_portraits_5_1778224606368.png" alt="Prof. Sarah Thompson">
+          </div>
+          <h4>Prof. Sarah Thompson</h4>
+          <p class="title">Marketing Expert</p>
+          <p class="desc">Behavioral Economics and Strategic Branding Specialist.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-grid">
+        <div class="footer-brand">
+          <div class="footer-logo">
+            <img src="../assets/img/logo.png" alt="VACEO Logo" class="footer-logo-img">
+          </div>
+          <p>Mạng lưới kết nối CEO VCCI-Andrews – Nơi hội tụ các nhà lãnh đạo bản lĩnh.</p>
+          <div class="footer-socials"><a href="#" class="social-btn">f</a><a href="#" class="social-btn">in</a><a href="#" class="social-btn">▶</a></div>
+        </div>
+        <div class="footer-col"><h4>Liên kết nhanh</h4><ul><li><a href="../index.html">Trang chủ</a></li><li><a href="alumni.html">Alumni</a></li><li><a href="knowledge.html">Knowledge Hub</a></li><li><a href="news.html">Tin tức & Sự kiện</a></li></ul></div>
+        <div class="footer-col"><h4>Chính sách</h4><ul><li><a href="#">Liên hệ</a></li><li><a href="#">Chính sách bảo mật</a></li><li><a href="#">Điều khoản sử dụng</a></li></ul></div>
+        <div class="footer-col"><h4>Thông tin liên hệ</h4><ul class="contact-list"><li>📍 Số 9 Đào Duy Anh, Đống Đa, Hà Nội</li><li>📞 024. 1234. 5678</li><li>✉️ info@vaceo.vn</li></ul></div>
+      </div>
+      <div class="footer-bottom"><p>© 2024 VACEO – VCCI Andrews Executive Network. All rights reserved.</p></div>
+    </div>
+  </footer>
+  <script src="../js/main.js"></script>
+</body>
+</html>

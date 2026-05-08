@@ -1,0 +1,481 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="utf-8"/>
+    <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+    <title>Mạng lưới Alumni CEO - VACEO</title>
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;600;700;800&family=Inter:wght@400;500;600&display=swap" rel="stylesheet"/>
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
+    <script id="tailwind-config">
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        primary: '#0A1D37',
+                        secondary: '#C5A059',
+                        accent: '#775a19',
+                        surface: '#fcfcfc',
+                        outline: '#e2e8f0',
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                        heading: ['Manrope', 'sans-serif'],
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+            font-size: 20px;
+        }
+        .filter-shadow {
+            box-shadow: 0 4px 25px rgba(0, 0, 0, 0.05);
+        }
+        .card-shadow {
+            box-shadow: 0 2px 15px rgba(0, 0, 0, 0.03);
+        }
+        .nav-link {
+            position: relative;
+            transition: all 0.3s;
+        }
+        .nav-link.active::after {
+            content: '';
+            position: absolute;
+            bottom: -4px;
+            left: 0;
+            width: 100%;
+            height: 2px;
+            background-color: #0A1D37;
+        }
+        .custom-select {
+            appearance: none;
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 24 24' stroke='%2364748b'%3E%3Cpath stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='M19 9l-7 7-7-7'%3E%3C/path%3E%3C/svg%3E");
+            background-repeat: no-repeat;
+            background-position: right 0.75rem center;
+            background-size: 1rem;
+        }
+    </style>
+</head>
+<body class="bg-surface text-primary font-sans antialiased">
+
+<!-- HEADER -->
+<header class="bg-white border-b border-outline sticky top-0 z-50">
+    <div class="max-w-[1200px] mx-auto px-6 h-[80px] flex items-center justify-between">
+        <div class="flex items-center">
+            <a href="../index.html">
+                <img src="../assets/img/logo.png" alt="VACEO Logo" class="h-10 w-auto object-contain">
+            </a>
+        </div>
+        <nav class="hidden md:flex items-center gap-8">
+            <a href="../index.html" class="nav-link text-[15px] font-medium text-slate-500 hover:text-primary">Trang chủ</a>
+            <a href="legacy.html" class="nav-link text-[15px] font-medium text-slate-500 hover:text-primary">Legacy</a>
+            <a href="knowledge.html" class="nav-link text-[15px] font-medium text-slate-500 hover:text-primary">Knowledge Hub</a>
+            <a href="alumni.html" class="nav-link active text-[15px] font-bold text-primary">Alumni</a>
+            <a href="cooperation.html" class="nav-link text-[15px] font-medium text-slate-500 hover:text-primary">Hợp tác</a>
+            <a href="news.html" class="nav-link text-[15px] font-medium text-slate-500 hover:text-primary">Sự kiện</a>
+        </nav>
+        <div>
+            <button class="bg-primary text-white px-8 py-2.5 rounded font-bold text-sm hover:bg-opacity-90 transition-all">Đăng nhập</button>
+        </div>
+    </div>
+</header>
+
+<!-- HERO SECTION -->
+<section class="max-w-[1200px] mx-auto px-6 py-16">
+    <h2 class="font-heading text-4xl font-extrabold mb-4">Mạng lưới Alumni CEO</h2>
+    <p class="text-slate-500 max-w-2xl text-lg leading-relaxed">
+        Khám phá cộng đồng lãnh đạo tinh hoa của VCCI-Andrews. Nơi kết nối tri thức, sức mạnh và những cơ hội hợp tác chiến lược giữa những người đứng đầu doanh nghiệp Việt Nam.
+    </p>
+</section>
+
+<!-- FILTER BOX -->
+<section class="max-w-[1200px] mx-auto px-6 mb-12">
+    <div class="bg-white p-8 rounded-xl filter-shadow border border-outline">
+        <!-- Top Row: Search & View Toggle -->
+        <div class="flex flex-col md:flex-row gap-4 mb-6">
+            <div class="relative flex-1">
+                <span class="material-symbols-outlined absolute left-4 top-1/2 -translate-y-1/2 text-slate-400">search</span>
+                <input type="text" placeholder="Tìm theo tên, công ty hoặc ngành nghề..." class="w-full pl-12 pr-4 py-3 bg-slate-50 border border-slate-200 rounded-lg focus:outline-none focus:border-primary transition-colors text-sm"/>
+            </div>
+            <div class="flex border border-slate-200 rounded-lg overflow-hidden shrink-0">
+                <button class="flex items-center gap-2 px-6 py-3 bg-slate-50 text-slate-500 font-bold text-[11px] uppercase tracking-wider hover:bg-slate-100 transition-colors border-r border-slate-200">
+                    <span class="material-symbols-outlined">grid_view</span> Danh sách
+                </button>
+                <button class="flex items-center gap-2 px-6 py-3 bg-white text-slate-400 font-bold text-[11px] uppercase tracking-wider hover:bg-slate-50 transition-colors">
+                    <span class="material-symbols-outlined">map</span> Bản đồ
+                </button>
+            </div>
+        </div>
+        <!-- Bottom Row: Dropdowns -->
+        <div class="grid grid-cols-2 md:grid-cols-5 gap-4">
+            <select class="custom-select w-full bg-slate-50 border border-slate-200 rounded-lg px-4 py-2.5 text-xs font-medium text-slate-600 outline-none">
+                <option>Khóa học</option>
+                <option>Khóa 20</option>
+                <option>Khóa 19</option>
+            </select>
+            <select class="custom-select w-full bg-slate-50 border border-slate-200 rounded-lg px-4 py-2.5 text-xs font-medium text-slate-600 outline-none">
+                <option>Địa phương</option>
+                <option>Hà Nội</option>
+                <option>TP. HCM</option>
+            </select>
+            <select class="custom-select w-full bg-slate-50 border border-slate-200 rounded-lg px-4 py-2.5 text-xs font-medium text-slate-600 outline-none">
+                <option>Power Team</option>
+            </select>
+            <select class="custom-select w-full bg-slate-50 border border-slate-200 rounded-lg px-4 py-2.5 text-xs font-medium text-slate-600 outline-none">
+                <option>Kỹ năng</option>
+            </select>
+            <select class="custom-select w-full bg-slate-50 border border-slate-200 rounded-lg px-4 py-2.5 text-xs font-medium text-slate-600 outline-none">
+                <option>Kết nối</option>
+            </select>
+        </div>
+    </div>
+</section>
+
+<!-- MEMBER GRID -->
+<section class="max-w-[1200px] mx-auto px-6 mb-16">
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+        <!-- Card 1 -->
+        <div class="bg-white rounded-2xl overflow-hidden card-shadow border border-outline flex flex-col hover:shadow-lg transition-all group">
+            <div class="aspect-[4/3] overflow-hidden">
+                <img src="../assets/img/alumni_portraits_2_1778224551134.png" alt="Nguyễn Văn Minh" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"/>
+            </div>
+            <div class="p-8 flex flex-col flex-1">
+                <span class="text-[10px] font-bold text-secondary uppercase tracking-widest mb-2">MBA COURSE 20</span>
+                <h3 class="font-heading text-xl font-extrabold mb-1">Nguyễn Văn Minh</h3>
+                <p class="text-sm text-slate-500 mb-4">CEO & Founder at TechVantage Solutions</p>
+                <div class="flex items-start gap-2 mb-6">
+                    <span class="material-symbols-outlined text-slate-400 shrink-0 mt-0.5">business_center</span>
+                    <p class="text-[12px] text-slate-400 italic">Lĩnh vực: Công nghệ Logistics & AI</p>
+                </div>
+                <div class="flex flex-wrap gap-2 mb-8">
+                    <span class="px-3 py-1 bg-slate-50 text-[10px] font-bold text-slate-400 rounded uppercase border border-slate-100">CHIẾN LƯỢC</span>
+                    <span class="px-3 py-1 bg-slate-50 text-[10px] font-bold text-slate-400 rounded uppercase border border-slate-100">SỐ HÓA</span>
+                    <span class="px-3 py-1 bg-slate-50 text-[10px] font-bold text-slate-400 rounded uppercase border border-slate-100">SCALE-UP</span>
+                </div>
+                <div class="flex gap-3 mt-auto">
+                    <button class="flex-1 py-3 px-4 border border-slate-200 rounded font-bold text-[11px] uppercase tracking-wider text-slate-500 hover:bg-slate-50 transition-colors">Xem hồ sơ</button>
+                    <button class="flex-1 py-3 px-4 bg-secondary text-white rounded font-bold text-[11px] uppercase tracking-wider hover:opacity-90 transition-colors shadow-sm shadow-secondary/20">Kết nối</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Card 2 -->
+        <div class="bg-white rounded-2xl overflow-hidden card-shadow border border-outline flex flex-col hover:shadow-lg transition-all group">
+            <div class="aspect-[4/3] overflow-hidden">
+                <img src="../assets/img/alumni_portraits_3_1778224567337.png" alt="Lê Thu Hà" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"/>
+            </div>
+            <div class="p-8 flex flex-col flex-1">
+                <span class="text-[10px] font-bold text-secondary uppercase tracking-widest mb-2">MBA COURSE 19</span>
+                <h3 class="font-heading text-xl font-extrabold mb-1">Lê Thu Hà</h3>
+                <p class="text-sm text-slate-500 mb-4">Managing Director at Green Finance Group</p>
+                <div class="flex items-start gap-2 mb-6">
+                    <span class="material-symbols-outlined text-slate-400 shrink-0 mt-0.5">business_center</span>
+                    <p class="text-[12px] text-slate-400 italic">Lĩnh vực: Tài chính & Đầu tư xanh</p>
+                </div>
+                <div class="flex flex-wrap gap-2 mb-8">
+                    <span class="px-3 py-1 bg-slate-50 text-[10px] font-bold text-slate-400 rounded uppercase border border-slate-100">ESG</span>
+                    <span class="px-3 py-1 bg-slate-50 text-[10px] font-bold text-slate-400 rounded uppercase border border-slate-100">QUẢN TRỊ</span>
+                    <span class="px-3 py-1 bg-slate-50 text-[10px] font-bold text-slate-400 rounded uppercase border border-slate-100">IPO</span>
+                </div>
+                <div class="flex gap-3 mt-auto">
+                    <button class="flex-1 py-3 px-4 border border-slate-200 rounded font-bold text-[11px] uppercase tracking-wider text-slate-500 hover:bg-slate-50 transition-colors">Xem hồ sơ</button>
+                    <button class="flex-1 py-3 px-4 bg-secondary text-white rounded font-bold text-[11px] uppercase tracking-wider hover:opacity-90 transition-colors shadow-sm shadow-secondary/20">Kết nối</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Card 3 -->
+        <div class="bg-white rounded-2xl overflow-hidden card-shadow border border-outline flex flex-col hover:shadow-lg transition-all group">
+            <div class="aspect-[4/3] overflow-hidden">
+                <img src="../assets/img/alumni_portraits_7_1778224638641.png" alt="Trần Quang Huy" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"/>
+            </div>
+            <div class="p-8 flex flex-col flex-1">
+                <span class="text-[10px] font-bold text-secondary uppercase tracking-widest mb-2">MBA COURSE 21</span>
+                <h3 class="font-heading text-xl font-extrabold mb-1">Trần Quang Huy</h3>
+                <p class="text-sm text-slate-500 mb-4">Founder of Urban Design Studio</p>
+                <div class="flex items-start gap-2 mb-6">
+                    <span class="material-symbols-outlined text-slate-400 shrink-0 mt-0.5">business_center</span>
+                    <p class="text-[12px] text-slate-400 italic">Lĩnh vực: Kiến trúc & Phát triển Đô thị</p>
+                </div>
+                <div class="flex flex-wrap gap-2 mb-8">
+                    <span class="px-3 py-1 bg-slate-50 text-[10px] font-bold text-slate-400 rounded uppercase border border-slate-100">CREATIVE</span>
+                    <span class="px-3 py-1 bg-slate-50 text-[10px] font-bold text-slate-400 rounded uppercase border border-slate-100">PROJECT MGT</span>
+                    <span class="px-3 py-1 bg-slate-50 text-[10px] font-bold text-slate-400 rounded uppercase border border-slate-100">DESIGN</span>
+                </div>
+                <div class="flex gap-3 mt-auto">
+                    <button class="flex-1 py-3 px-4 border border-slate-200 rounded font-bold text-[11px] uppercase tracking-wider text-slate-500 hover:bg-slate-50 transition-colors">Xem hồ sơ</button>
+                    <button class="flex-1 py-3 px-4 bg-secondary text-white rounded font-bold text-[11px] uppercase tracking-wider hover:opacity-90 transition-colors shadow-sm shadow-secondary/20">Kết nối</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Card 4 -->
+        <div class="bg-white rounded-2xl overflow-hidden card-shadow border border-outline flex flex-col hover:shadow-lg transition-all group">
+            <div class="aspect-[4/3] overflow-hidden">
+                <img src="../assets/img/alumni_portraits_4_1778224590946.png" alt="Phạm Minh Tú" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"/>
+            </div>
+            <div class="p-8 flex flex-col flex-1">
+                <span class="text-[10px] font-bold text-secondary uppercase tracking-widest mb-2">MBA COURSE 15</span>
+                <h3 class="font-heading text-xl font-extrabold mb-1">Phạm Minh Tú</h3>
+                <p class="text-sm text-slate-500 mb-4">Chairman of Delta Manufacturing</p>
+                <div class="flex items-start gap-2 mb-6">
+                    <span class="material-symbols-outlined text-slate-400 shrink-0 mt-0.5">business_center</span>
+                    <p class="text-[12px] text-slate-400 italic">Lĩnh vực: Sản xuất Công nghiệp nặng</p>
+                </div>
+                <div class="flex flex-wrap gap-2 mb-8">
+                    <span class="px-3 py-1 bg-slate-50 text-[10px] font-bold text-slate-400 rounded uppercase border border-slate-100">VẬN HÀNH</span>
+                    <span class="px-3 py-1 bg-slate-50 text-[10px] font-bold text-slate-400 rounded uppercase border border-slate-100">LEAN</span>
+                    <span class="px-3 py-1 bg-slate-50 text-[10px] font-bold text-slate-400 rounded uppercase border border-slate-100">HỢP TÁC QT</span>
+                </div>
+                <div class="flex gap-3 mt-auto">
+                    <button class="flex-1 py-3 px-4 border border-slate-200 rounded font-bold text-[11px] uppercase tracking-wider text-slate-500 hover:bg-slate-50 transition-colors">Xem hồ sơ</button>
+                    <button class="flex-1 py-3 px-4 bg-secondary text-white rounded font-bold text-[11px] uppercase tracking-wider hover:opacity-90 transition-colors shadow-sm shadow-secondary/20">Kết nối</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Card 5 -->
+        <div class="bg-white rounded-2xl overflow-hidden card-shadow border border-outline flex flex-col hover:shadow-lg transition-all group">
+            <div class="aspect-[4/3] overflow-hidden">
+                <img src="../assets/img/alumni_portraits_5_1778224606368.png" alt="Hoàng Lan Anh" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"/>
+            </div>
+            <div class="p-8 flex flex-col flex-1">
+                <span class="text-[10px] font-bold text-secondary uppercase tracking-widest mb-2">MBA COURSE 22</span>
+                <h3 class="font-heading text-xl font-extrabold mb-1">Hoàng Lan Anh</h3>
+                <p class="text-sm text-slate-500 mb-4">CEO of Aurora Digital Marketing</p>
+                <div class="flex items-start gap-2 mb-6">
+                    <span class="material-symbols-outlined text-slate-400 shrink-0 mt-0.5">business_center</span>
+                    <p class="text-[12px] text-slate-400 italic">Lĩnh vực: Truyền thông & Quảng cáo số</p>
+                </div>
+                <div class="flex flex-wrap gap-2 mb-8">
+                    <span class="px-3 py-1 bg-slate-50 text-[10px] font-bold text-slate-400 rounded uppercase border border-slate-100">CREATIVITY</span>
+                    <span class="px-3 py-1 bg-slate-50 text-[10px] font-bold text-slate-400 rounded uppercase border border-slate-100">BRANDING</span>
+                    <span class="px-3 py-1 bg-slate-50 text-[10px] font-bold text-slate-400 rounded uppercase border border-slate-100">TECH-ADS</span>
+                </div>
+                <div class="flex gap-3 mt-auto">
+                    <button class="flex-1 py-3 px-4 border border-slate-200 rounded font-bold text-[11px] uppercase tracking-wider text-slate-500 hover:bg-slate-50 transition-colors">Xem hồ sơ</button>
+                    <button class="flex-1 py-3 px-4 bg-secondary text-white rounded font-bold text-[11px] uppercase tracking-wider hover:opacity-90 transition-colors shadow-sm shadow-secondary/20">Kết nối</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Card 6 -->
+        <div class="bg-white rounded-2xl overflow-hidden card-shadow border border-outline flex flex-col hover:shadow-lg transition-all group">
+            <div class="aspect-[4/3] overflow-hidden">
+                <img src="../assets/img/alumni_portraits_6_1778224620444.png" alt="Đỗ Trọng Nghĩa" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"/>
+            </div>
+            <div class="p-8 flex flex-col flex-1">
+                <span class="text-[10px] font-bold text-secondary uppercase tracking-widest mb-2">MBA COURSE 19</span>
+                <h3 class="font-heading text-xl font-extrabold mb-1">Đỗ Trọng Nghĩa</h3>
+                <p class="text-sm text-slate-500 mb-4">Partner at Vina Capital Legal</p>
+                <div class="flex items-start gap-2 mb-6">
+                    <span class="material-symbols-outlined text-slate-400 shrink-0 mt-0.5">business_center</span>
+                    <p class="text-[12px] text-slate-400 italic">Lĩnh vực: Pháp lý & Tư vấn M&A</p>
+                </div>
+                <div class="flex flex-wrap gap-2 mb-8">
+                    <span class="px-3 py-1 bg-slate-50 text-[10px] font-bold text-slate-400 rounded uppercase border border-slate-100">M&A</span>
+                    <span class="px-3 py-1 bg-slate-50 text-[10px] font-bold text-slate-400 rounded uppercase border border-slate-100">LEGAL</span>
+                    <span class="px-3 py-1 bg-slate-50 text-[10px] font-bold text-slate-400 rounded uppercase border border-slate-100">COMPLIANCE</span>
+                </div>
+                <div class="flex gap-3 mt-auto">
+                    <button class="flex-1 py-3 px-4 border border-slate-200 rounded font-bold text-[11px] uppercase tracking-wider text-slate-500 hover:bg-slate-50 transition-colors">Xem hồ sơ</button>
+                    <button class="flex-1 py-3 px-4 bg-secondary text-white rounded font-bold text-[11px] uppercase tracking-wider hover:opacity-90 transition-colors shadow-sm shadow-secondary/20">Kết nối</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Card 7 (New) -->
+        <div class="bg-white rounded-2xl overflow-hidden card-shadow border border-outline flex flex-col hover:shadow-lg transition-all group">
+            <div class="aspect-[4/3] overflow-hidden">
+                <img src="../assets/img/alumni_portraits_8_1778224843780.png" alt="Bùi Lan Phương" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"/>
+            </div>
+            <div class="p-8 flex flex-col flex-1">
+                <span class="text-[10px] font-bold text-secondary uppercase tracking-widest mb-2">MBA COURSE 13</span>
+                <h3 class="font-heading text-xl font-extrabold mb-1">Bùi Lan Phương</h3>
+                <p class="text-sm text-slate-500 mb-4">Founder & CEO at EduTech Vietnam</p>
+                <div class="flex items-start gap-2 mb-6">
+                    <span class="material-symbols-outlined text-slate-400 shrink-0 mt-0.5">business_center</span>
+                    <p class="text-[12px] text-slate-400 italic">Lĩnh vực: Giáo dục trực tuyến & EdTech</p>
+                </div>
+                <div class="flex flex-wrap gap-2 mb-8">
+                    <span class="px-3 py-1 bg-slate-50 text-[10px] font-bold text-slate-400 rounded uppercase border border-slate-100">E-LEARNING</span>
+                    <span class="px-3 py-1 bg-slate-50 text-[10px] font-bold text-slate-400 rounded uppercase border border-slate-100">START-UP</span>
+                    <span class="px-3 py-1 bg-slate-50 text-[10px] font-bold text-slate-400 rounded uppercase border border-slate-100">INNOVATION</span>
+                </div>
+                <div class="flex gap-3 mt-auto">
+                    <button class="flex-1 py-3 px-4 border border-slate-200 rounded font-bold text-[11px] uppercase tracking-wider text-slate-500 hover:bg-slate-50 transition-colors">Xem hồ sơ</button>
+                    <button class="flex-1 py-3 px-4 bg-secondary text-white rounded font-bold text-[11px] uppercase tracking-wider hover:opacity-90 transition-colors shadow-sm shadow-secondary/20">Kết nối</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Card 8 (New) -->
+        <div class="bg-white rounded-2xl overflow-hidden card-shadow border border-outline flex flex-col hover:shadow-lg transition-all group">
+            <div class="aspect-[4/3] overflow-hidden">
+                <img src="../assets/img/alumni_portraits_9_1778224861506.png" alt="Vũ Tuấn Anh" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"/>
+            </div>
+            <div class="p-8 flex flex-col flex-1">
+                <span class="text-[10px] font-bold text-secondary uppercase tracking-widest mb-2">MBA COURSE 14</span>
+                <h3 class="font-heading text-xl font-extrabold mb-1">Vũ Tuấn Anh</h3>
+                <p class="text-sm text-slate-500 mb-4">CEO at Smart Retail Chain</p>
+                <div class="flex items-start gap-2 mb-6">
+                    <span class="material-symbols-outlined text-slate-400 shrink-0 mt-0.5">business_center</span>
+                    <p class="text-[12px] text-slate-400 italic">Lĩnh vực: Bán lẻ & Chuỗi cung ứng</p>
+                </div>
+                <div class="flex flex-wrap gap-2 mb-8">
+                    <span class="px-3 py-1 bg-slate-50 text-[10px] font-bold text-slate-400 rounded uppercase border border-slate-100">FMCG</span>
+                    <span class="px-3 py-1 bg-slate-50 text-[10px] font-bold text-slate-400 rounded uppercase border border-slate-100">RETAIL</span>
+                    <span class="px-3 py-1 bg-slate-50 text-[10px] font-bold text-slate-400 rounded uppercase border border-slate-100">OPERATIONS</span>
+                </div>
+                <div class="flex gap-3 mt-auto">
+                    <button class="flex-1 py-3 px-4 border border-slate-200 rounded font-bold text-[11px] uppercase tracking-wider text-slate-500 hover:bg-slate-50 transition-colors">Xem hồ sơ</button>
+                    <button class="flex-1 py-3 px-4 bg-secondary text-white rounded font-bold text-[11px] uppercase tracking-wider hover:opacity-90 transition-colors shadow-sm shadow-secondary/20">Kết nối</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Card 9 (New) -->
+        <div class="bg-white rounded-2xl overflow-hidden card-shadow border border-outline flex flex-col hover:shadow-lg transition-all group">
+            <div class="aspect-[4/3] overflow-hidden">
+                <img src="../assets/img/alumni_portraits_10_1778224880098.png" alt="Ngô Bảo Châu" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"/>
+            </div>
+            <div class="p-8 flex flex-col flex-1">
+                <span class="text-[10px] font-bold text-secondary uppercase tracking-widest mb-2">MBA COURSE 07</span>
+                <h3 class="font-heading text-xl font-extrabold mb-1">Ngô Bảo Châu</h3>
+                <p class="text-sm text-slate-500 mb-4">Managing Director at Horizon Logistics</p>
+                <div class="flex items-start gap-2 mb-6">
+                    <span class="material-symbols-outlined text-slate-400 shrink-0 mt-0.5">business_center</span>
+                    <p class="text-[12px] text-slate-400 italic">Lĩnh vực: Logistics & Vận tải biển</p>
+                </div>
+                <div class="flex flex-wrap gap-2 mb-8">
+                    <span class="px-3 py-1 bg-slate-50 text-[10px] font-bold text-slate-400 rounded uppercase border border-slate-100">LOGISTICS</span>
+                    <span class="px-3 py-1 bg-slate-50 text-[10px] font-bold text-slate-400 rounded uppercase border border-slate-100">MARITIME</span>
+                    <span class="px-3 py-1 bg-slate-50 text-[10px] font-bold text-slate-400 rounded uppercase border border-slate-100">STRATEGY</span>
+                </div>
+                <div class="flex gap-3 mt-auto">
+                    <button class="flex-1 py-3 px-4 border border-slate-200 rounded font-bold text-[11px] uppercase tracking-wider text-slate-500 hover:bg-slate-50 transition-colors">Xem hồ sơ</button>
+                    <button class="flex-1 py-3 px-4 bg-secondary text-white rounded font-bold text-[11px] uppercase tracking-wider hover:opacity-90 transition-colors shadow-sm shadow-secondary/20">Kết nối</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- PAGINATION -->
+<div class="flex items-center justify-center gap-2 mb-20">
+    <button class="w-10 h-10 flex items-center justify-center border border-outline rounded hover:bg-slate-50 transition-colors">
+        <span class="material-symbols-outlined">chevron_left</span>
+    </button>
+    <button class="w-10 h-10 flex items-center justify-center bg-primary text-white font-bold text-xs rounded">1</button>
+    <button class="w-10 h-10 flex items-center justify-center border border-outline text-slate-400 font-bold text-xs rounded hover:bg-slate-50 transition-colors">2</button>
+    <button class="w-10 h-10 flex items-center justify-center border border-outline text-slate-400 font-bold text-xs rounded hover:bg-slate-50 transition-colors">3</button>
+    <span class="text-slate-400">...</span>
+    <button class="w-10 h-10 flex items-center justify-center border border-outline text-slate-400 font-bold text-xs rounded hover:bg-slate-50 transition-colors">12</button>
+    <button class="w-10 h-10 flex items-center justify-center border border-outline rounded hover:bg-slate-50 transition-colors">
+        <span class="material-symbols-outlined">chevron_right</span>
+    </button>
+</div>
+
+<!-- CTA SECTION -->
+<section class="bg-primary py-20 overflow-hidden relative">
+    <div class="max-w-[1200px] mx-auto px-6 relative z-10 flex flex-col md:flex-row items-center gap-12">
+        <div class="flex-1">
+            <h2 class="text-white font-heading text-3xl font-extrabold mb-4">Bạn là Alumni của VCCI-Andrews?</h2>
+            <p class="text-white/60 mb-10 text-lg leading-relaxed">
+                Gia nhập danh bạ để tăng khả năng kết nối và tiếp cận các tài nguyên đặc quyền dành riêng cho cộng đồng CEO của chúng tôi.
+            </p>
+            <div class="flex gap-4">
+                <button class="bg-secondary text-white px-10 py-4 rounded font-bold text-sm hover:opacity-90 transition-all shadow-xl shadow-black/20">Cập nhật hồ sơ</button>
+                <button class="border border-white/20 text-white px-10 py-4 rounded font-bold text-sm hover:bg-white/5 transition-all">Tìm hiểu thêm</button>
+            </div>
+        </div>
+        <div class="flex gap-8">
+            <div class="bg-white/5 backdrop-blur-sm border border-white/10 p-8 rounded-2xl text-center min-w-[160px]">
+                <p class="text-secondary text-3xl font-extrabold mb-1">500+</p>
+                <p class="text-white/40 text-[11px] font-bold uppercase tracking-widest">THÀNH VIÊN</p>
+            </div>
+            <div class="bg-white/5 backdrop-blur-sm border border-white/10 p-8 rounded-2xl text-center min-w-[160px]">
+                <p class="text-secondary text-3xl font-extrabold mb-1">20+</p>
+                <p class="text-white/40 text-[11px] font-bold uppercase tracking-widest">QUỐC GIA</p>
+            </div>
+        </div>
+    </div>
+    <!-- Background visual element -->
+    <div class="absolute right-0 bottom-0 w-1/3 h-full bg-gradient-to-l from-white/5 to-transparent pointer-events-none"></div>
+</section>
+
+<!-- FOOTER -->
+<footer class="bg-white pt-20 pb-10 border-t border-outline">
+    <div class="max-w-[1200px] mx-auto px-6">
+        <div class="grid grid-cols-1 md:grid-cols-4 gap-12 mb-20">
+            <div>
+                <img src="../assets/img/logo.png" alt="VACEO Logo" class="h-12 w-auto object-contain mb-8">
+                <p class="text-slate-500 text-sm leading-relaxed mb-8">
+                    Hợp tác chiến lược đào tạo lãnh đạo giữa VCCI và Đại học Andrews, Hoa Kỳ. Nâng tầm vị thế doanh nhân Việt trên bản đồ kinh tế toàn cầu.
+                </p>
+                <div class="flex gap-4">
+                    <button class="w-10 h-10 border border-outline rounded-full flex items-center justify-center text-slate-400 hover:text-primary transition-colors">
+                        <span class="material-symbols-outlined">language</span>
+                    </button>
+                    <button class="w-10 h-10 border border-outline rounded-full flex items-center justify-center text-slate-400 hover:text-primary transition-colors">
+                        <span class="material-symbols-outlined">share</span>
+                    </button>
+                </div>
+            </div>
+            <div>
+                <h4 class="text-[13px] font-extrabold uppercase tracking-[0.2em] mb-8">LIÊN KẾT NHANH</h4>
+                <ul class="space-y-4">
+                    <li><a href="legacy.html" class="text-slate-500 hover:text-primary text-sm transition-colors">Về VCCI-Andrews</a></li>
+                    <li><a href="alumni.html" class="text-slate-500 hover:text-primary text-sm transition-colors font-bold">Cộng đồng Alumni</a></li>
+                    <li><a href="knowledge.html" class="text-slate-500 hover:text-primary text-sm transition-colors">Thư viện tri thức</a></li>
+                    <li><a href="news.html" class="text-slate-500 hover:text-primary text-sm transition-colors">Tin tức & Sự kiện</a></li>
+                </ul>
+            </div>
+            <div>
+                <h4 class="text-[13px] font-extrabold uppercase tracking-[0.2em] mb-8">HỖ TRỢ & CHÍNH SÁCH</h4>
+                <ul class="space-y-4">
+                    <li><a href="#" class="text-slate-500 hover:text-primary text-sm transition-colors">Liên hệ</a></li>
+                    <li><a href="#" class="text-slate-500 hover:text-primary text-sm transition-colors">Chính sách bảo mật</a></li>
+                    <li><a href="#" class="text-slate-500 hover:text-primary text-sm transition-colors">Điều khoản sử dụng</a></li>
+                    <li><a href="#" class="text-slate-500 hover:text-primary text-sm transition-colors">Đăng nhập Hội viên</a></li>
+                </ul>
+            </div>
+            <div>
+                <h4 class="text-[13px] font-extrabold uppercase tracking-[0.2em] mb-8">BẢN TIN & LIÊN HỆ</h4>
+                <div class="space-y-6">
+                    <div class="flex gap-3">
+                        <span class="material-symbols-outlined text-secondary">location_on</span>
+                        <p class="text-slate-500 text-[12px] leading-relaxed">Số 9 Đào Duy Anh, Đống Đa, Hà Nội</p>
+                    </div>
+                    <div class="flex gap-3">
+                        <span class="material-symbols-outlined text-secondary">phone</span>
+                        <p class="text-slate-500 text-[12px]">+84 (24) 1234 5678</p>
+                    </div>
+                    <div class="flex gap-3">
+                        <span class="material-symbols-outlined text-secondary">mail</span>
+                        <p class="text-slate-500 text-[12px]">contact@vaceo.edu.vn</p>
+                    </div>
+                    <div class="relative mt-8">
+                        <input type="text" placeholder="Email của bạn" class="w-full pl-4 pr-12 py-3 bg-slate-50 border border-slate-200 rounded focus:outline-none focus:border-primary text-sm"/>
+                        <button class="absolute right-2 top-1/2 -translate-y-1/2 w-8 h-8 bg-primary text-white rounded flex items-center justify-center">
+                            <span class="material-symbols-outlined text-[16px]">send</span>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="pt-10 border-t border-outline flex flex-col md:flex-row justify-between items-center gap-4">
+            <p class="text-slate-400 text-[11px]">© 2024 VACEO - Andrews Partnership. All rights reserved.</p>
+            <div class="flex gap-6">
+                <a href="#" class="text-slate-400 hover:text-primary text-[11px] transition-colors">Chính sách bảo mật</a>
+                <a href="#" class="text-slate-400 hover:text-primary text-[11px] transition-colors">Điều khoản sử dụng</a>
+            </div>
+        </div>
+    </div>
+</footer>
+
+</body>
+</html>

@@ -1,0 +1,249 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Tin tức & Sự kiện – VACEO | Cập nhật cộng đồng CEO</title>
+  <meta name="description" content="Tin tức, sự kiện và hoạt động mới nhất từ cộng đồng CEO VACEO và mạng lưới VCCI-Andrews." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@300;400;500;600;700;800&family=Inter:wght@400;500;600&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="../css/style.css" />
+  <style>
+    /* News Hub Specific Styles */
+    .hero-news {
+      height: 60vh;
+      min-height: 500px;
+      background: linear-gradient(rgba(6, 14, 32, 0.7), rgba(6, 14, 32, 0.7)), url('https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?auto=format&fit=crop&q=80&w=2000');
+      background-size: cover;
+      background-position: center;
+      display: flex;
+      align-items: center;
+      color: #fff;
+    }
+    .hero-news-content { max-width: 800px; }
+    .hero-news .badge { background: var(--gold); color: #fff; font-size: 0.7rem; font-weight: 800; padding: 4px 12px; border-radius: 4px; text-transform: uppercase; margin-bottom: 1.5rem; display: inline-block; letter-spacing: 0.1em; }
+    .hero-news h1 { font-family: 'Manrope', sans-serif; font-size: 3.5rem; font-weight: 800; line-height: 1.2; margin-bottom: 1.5rem; }
+    .hero-news p { font-size: 1.1rem; color: rgba(255,255,255,0.8); margin-bottom: 2rem; line-height: 1.6; }
+
+    /* Layout */
+    .news-container { display: grid; grid-template-columns: 280px 1fr; gap: 4rem; padding: 6rem 0; }
+
+    /* Sidebar */
+    .sidebar-title { font-family: 'Manrope', sans-serif; font-size: 1.2rem; font-weight: 800; color: var(--navy); margin-bottom: 2rem; }
+    .cat-list { list-style: none; padding: 0; margin-bottom: 4rem; }
+    .cat-item { display: flex; justify-content: space-between; align-items: center; padding: 0.75rem 0; border-bottom: 1px solid rgba(0,0,0,0.05); cursor: pointer; transition: var(--transition); }
+    .cat-item:hover { transform: translateX(5px); }
+    .cat-item.active { color: var(--gold); border-bottom-color: var(--gold); }
+    .cat-name { font-size: 0.9rem; font-weight: 600; }
+    .cat-count { font-size: 0.75rem; color: var(--on-surface-var); opacity: 0.5; }
+
+    .upcoming-events { background: var(--navy); border-radius: 1rem; padding: 2rem; color: #fff; }
+    .upcoming-events h3 { font-family: 'Manrope', sans-serif; font-size: 1.1rem; font-weight: 800; margin-bottom: 1.5rem; }
+    .event-item { border-bottom: 1px solid rgba(255,255,255,0.1); padding-bottom: 1.25rem; margin-bottom: 1.25rem; }
+    .event-item:last-child { border: none; padding: 0; margin: 0; }
+    .event-date { font-size: 0.7rem; font-weight: 700; color: var(--gold); text-transform: uppercase; margin-bottom: 0.5rem; display: block; }
+    .event-title { font-size: 0.85rem; font-weight: 700; line-height: 1.4; color: #fff; text-decoration: none; display: block; transition: var(--transition); }
+    .event-title:hover { color: var(--gold); }
+
+    /* News Grid */
+    .news-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 2rem; }
+    .news-card { background: #fff; border-radius: 1rem; overflow: hidden; border: 1px solid rgba(0,0,0,0.05); transition: var(--transition); display: flex; flex-direction: column; }
+    .news-card:hover { transform: translateY(-10px); box-shadow: 0 20px 40px rgba(0,0,0,0.05); }
+    .card-thumb { height: 240px; background-size: cover; background-position: center; position: relative; }
+    .card-badge { position: absolute; top: 1.25rem; left: 1.25rem; background: #fff; color: var(--navy); font-size: 0.6rem; font-weight: 800; padding: 4px 10px; border-radius: 4px; text-transform: uppercase; letter-spacing: 0.05em; }
+    .card-body { padding: 2rem; flex: 1; display: flex; flex-direction: column; }
+    .card-date { font-size: 0.8rem; color: var(--on-surface-var); opacity: 0.6; margin-bottom: 0.75rem; display: block; }
+    .card-body h3 { font-family: 'Manrope', sans-serif; font-size: 1.3rem; font-weight: 800; color: var(--navy); margin-bottom: 1rem; line-height: 1.3; }
+    .card-body p { font-size: 0.9rem; color: var(--on-surface-var); line-height: 1.6; margin-bottom: 2rem; }
+    .read-more { font-size: 0.75rem; font-weight: 800; color: var(--navy); text-decoration: none; text-transform: uppercase; margin-top: auto; transition: var(--transition); }
+    .read-more:hover { color: var(--gold); letter-spacing: 0.05em; }
+
+    /* Pagination */
+    .pagination { display: flex; justify-content: center; align-items: center; gap: 0.5rem; margin-top: 4rem; }
+    .page-btn { width: 40px; height: 40px; display: flex; align-items: center; justify-content: center; border: 1px solid rgba(0,0,0,0.05); border-radius: 8px; font-size: 0.9rem; font-weight: 700; color: var(--navy); text-decoration: none; transition: var(--transition); }
+    .page-btn:hover, .page-btn.active { background: var(--navy); color: #fff; border-color: var(--navy); }
+
+    /* Newsletter CTA */
+    .summary-section { background: #fcfdfe; padding: 8rem 0; text-align: center; border-top: 1px solid rgba(0,0,0,0.05); }
+    .summary-section h2 { font-family: 'Manrope', sans-serif; font-size: 2.2rem; font-weight: 800; color: var(--navy); margin-bottom: 1rem; }
+    .summary-section p { font-size: 1rem; color: var(--on-surface-var); max-width: 600px; margin: 0 auto 3rem; line-height: 1.6; }
+    .summary-form { max-width: 600px; margin: 0 auto; display: flex; gap: 1rem; background: #fff; padding: 0.5rem; border-radius: 12px; box-shadow: 0 10px 30px rgba(0,0,0,0.05); }
+    .summary-form input { flex: 1; border: none; padding: 1rem 1.5rem; font-size: 0.95rem; outline: none; }
+    .summary-form button { background: var(--navy); color: #fff; border: none; padding: 0 2rem; border-radius: 8px; font-weight: 700; cursor: pointer; transition: var(--transition); }
+    .summary-form button:hover { background: #0c1c36; }
+
+    @media(max-width:992px) {
+      .news-container, .news-grid { grid-template-columns: 1fr; }
+      .hero-news h1 { font-size: 2.5rem; }
+    }
+  </style>
+</head>
+<body>
+  <nav id="navbar">
+    <div class="nav-inner">
+      <a href="../index.html" class="logo">
+        <img src="../assets/img/logo.png" alt="VACEO Logo" class="logo-img">
+      </a>
+      <ul class="nav-links">
+        <li><a href="../index.html" class="nav-link">Trang chủ</a></li>
+        <li><a href="legacy.html" class="nav-link">Legacy</a></li>
+        <li><a href="knowledge.html" class="nav-link">Knowledge Hub</a></li>
+        <li><a href="alumni.html" class="nav-link">Alumni</a></li>
+        <li><a href="cooperation.html" class="nav-link">Hợp tác</a></li>
+        <li><a href="news.html" class="nav-link active">Sự kiện</a></li>
+      </ul>
+      <div class="nav-actions">
+        <a href="#" class="btn-outline-nav">Login</a>
+      </div>
+      <button class="mobile-toggle" id="mobileToggle"><span></span><span></span><span></span></button>
+    </div>
+  </nav>
+
+  <section class="hero-news">
+    <div class="container">
+      <div class="hero-news-content">
+        <span class="badge">INSIGHT ĐỘC QUYỀN</span>
+        <h1>Tầm nhìn Chiến lược CEO 2024: Thích ứng trong Kỷ nguyên Số</h1>
+        <p>Khám phá những phân tích chuyên sâu về cách các nhà lãnh đạo hàng đầu Việt Nam đang tái định nghĩa mô hình kinh doanh để đón đầu làn sóng công nghệ mới.</p>
+        <a href="#" class="btn-gold" style="padding: 1rem 2.5rem;">Đọc chi tiết →</a>
+      </div>
+    </div>
+  </section>
+
+  <section class="container">
+    <div class="news-container">
+      <aside class="news-sidebar">
+        <h2 class="sidebar-title">Danh mục</h2>
+        <ul class="cat-list">
+          <li class="cat-item active"><span class="cat-name">Tất cả tin tức</span> <span class="cat-count">24</span></li>
+          <li class="cat-item"><span class="cat-name">Executive Insights</span> <span class="cat-count">12</span></li>
+          <li class="cat-item"><span class="cat-name">Network News</span> <span class="cat-count">8</span></li>
+          <li class="cat-item"><span class="cat-name">Global Trends</span> <span class="cat-count">4</span></li>
+        </ul>
+
+        <div class="upcoming-events">
+          <h3>Sự kiện sắp tới</h3>
+          <div class="event-item">
+            <span class="event-date">15 THÁNG 12, 2024</span>
+            <a href="#" class="event-title">Gala Dinner & Networking: Executive Summit</a>
+          </div>
+          <div class="event-item">
+            <span class="event-date">22 THÁNG 01, 2025</span>
+            <a href="#" class="event-title">Hội thảo: Chuyển đổi Xanh trong Doanh nghiệp</a>
+          </div>
+        </div>
+      </aside>
+
+      <main class="news-main">
+        <div class="news-grid">
+          <div class="news-card">
+            <div class="card-thumb" style="background-image: url('https://images.unsplash.com/photo-1431540015161-0bf868a2d407?auto=format&fit=crop&q=80&w=1000');">
+              <span class="card-badge">TIN TỨC</span>
+            </div>
+            <div class="card-body">
+              <span class="card-date">12/11/2024</span>
+              <h3>VACEO chính thức ký kết hợp tác chiến lược với Hiệp hội Doanh nghiệp Andrews</h3>
+              <p>Mở rộng mạng lưới kết nối toàn cầu, tạo điều kiện cho các hội viên tiếp cận những nguồn lực đào tạo và kinh doanh hàng đầu từ Hoa Kỳ...</p>
+              <a href="#" class="read-more">XEM THÊM ›</a>
+            </div>
+          </div>
+
+          <div class="news-card">
+            <div class="card-thumb" style="background-image: url('https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?auto=format&fit=crop&q=80&w=1000');">
+              <span class="card-badge">INSIGHT</span>
+            </div>
+            <div class="card-body">
+              <span class="card-date">08/11/2024</span>
+              <h3>Lãnh đạo trong thời kỳ biến động: Bài học từ các CEO kỳ cựu</h3>
+              <p>Những chia sẻ thực tế về kỹ năng quản trị khủng hoảng và duy trì sự bền bỉ của đội ngũ trong môi trường kinh doanh đầy thách thức hiện nay.</p>
+              <a href="#" class="read-more">XEM THÊM ›</a>
+            </div>
+          </div>
+
+          <div class="news-card">
+            <div class="card-thumb" style="background-image: url('https://images.unsplash.com/photo-1515187029135-18ee286d815b?auto=format&fit=crop&q=80&w=1000');">
+              <span class="card-badge">SỰ KIỆN</span>
+            </div>
+            <div class="card-body">
+              <span class="card-date">05/11/2024</span>
+              <h3>Tổng kết Alumni Gala 2024: Nơi hội tụ của những giá trị kế thừa</h3>
+              <p>Đêm tiệc tri ân và kết nối các thế hệ cựu học viên VACEO đã diễn ra thành công tốt đẹp với sự tham gia của hơn 200 khách mời danh dự.</p>
+              <a href="#" class="read-more">XEM THÊM ›</a>
+            </div>
+          </div>
+
+          <div class="news-card">
+            <div class="card-thumb" style="background-image: url('https://images.unsplash.com/photo-1498050108023-c5249f4df085?auto=format&fit=crop&q=80&w=1000');">
+              <span class="card-badge">THÔNG BÁO</span>
+            </div>
+            <div class="card-body">
+              <span class="card-date">01/11/2024</span>
+              <h3>VACEO công bố chương trình đào tạo Executive Leadership 2025</h3>
+              <p>Chương trình được thiết kế đặc biệt cho các nhà lãnh đạo cấp cao, tích hợp các module quản trị hiện đại từ Andrews University.</p>
+              <a href="#" class="read-more">XEM THÊM ›</a>
+            </div>
+          </div>
+        </div>
+
+        <div class="pagination">
+          <a href="#" class="page-btn">‹</a>
+          <a href="#" class="page-btn active">1</a>
+          <a href="#" class="page-btn">2</a>
+          <a href="#" class="page-btn">3</a>
+          <a href="#" class="page-btn">›</a>
+        </div>
+      </main>
+    </div>
+  </section>
+
+  <section class="summary-section">
+    <div class="container">
+      <h2>Executive Summaries</h2>
+      <p>Nhận những bản tin phân tích độc quyền và cập nhật mới nhất từ mạng lưới VACEO trực tiếp vào hộp thư của bạn hàng tuần.</p>
+      <div class="summary-form">
+        <input type="email" placeholder="Email của lãnh đạo...">
+        <button>ĐĂNG KÝ NGAY</button>
+      </div>
+      <p style="font-size: 0.75rem; color: var(--on-surface-var); opacity: 0.5; margin-top: 1.5rem;">Chúng tôi cam kết bảo mật thông tin và tôn trọng sự riêng tư của hội viên.</p>
+    </div>
+  </section>
+
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-grid">
+        <div class="footer-brand">
+          <div class="footer-logo">
+            <img src="../assets/img/logo.png" alt="VACEO Logo" class="footer-logo-img">
+          </div>
+          <p>Hợp tác chiến lược giữa VCCI và Andrews University, xây dựng cộng đồng lãnh đạo tinh hoa, kiến tạo giá trị bền vững cho doanh nghiệp Việt.</p>
+          <div class="footer-socials">
+            <a href="#">Facebook</a> · <a href="#">LinkedIn</a> · <a href="#">YouTube</a>
+          </div>
+        </div>
+        <div class="footer-col">
+          <h4>QUICK LINKS</h4>
+          <ul>
+            <li><a href="#">Member Login</a></li>
+            <li><a href="#">Privacy Policy</a></li>
+            <li><a href="#">Terms of Service</a></li>
+            <li><a href="#">Contact</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h4>VĂN PHÒNG</h4>
+          <ul class="contact-list">
+            <li>Tầng 4, Tòa nhà VCCI</li>
+            <li>Số 9 Đào Duy Anh, Đống Đa</li>
+            <li>Hà Nội, Việt Nam</li>
+            <li>info@vaceo.edu.vn</li>
+          </ul>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <p>© 2024 VACEO - VCCI Andrews CEO Network. All rights reserved.</p>
+      </div>
+    </div>
+  </footer>
+  <script src="../js/main.js"></script>
+</body>
+</html>

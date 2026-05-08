@@ -1,0 +1,344 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Hợp tác – VACEO | Trung tâm Hợp tác CEO</title>
+  <meta name="description" content="Không gian trao đổi cơ hội kinh doanh và liên kết chuỗi giá trị cho cộng đồng CEO VACEO." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@300;400;500;600;700;800&family=Inter:wght@400;500;600&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="../css/style.css" />
+  <style>
+    /* Cooperation Hub Styles */
+    .hero-coop { background: #fff; padding: 8rem 0 4rem; }
+    .hero-coop-grid { display: grid; grid-template-columns: 1.5fr 1fr; align-items: center; gap: 4rem; }
+    .hero-coop-text .label { font-size: 0.75rem; font-weight: 700; color: var(--gold); text-transform: uppercase; letter-spacing: 0.15em; margin-bottom: 1rem; display: block; }
+    .hero-coop-text h1 { font-family: 'Manrope', sans-serif; font-size: 3.5rem; font-weight: 800; color: var(--navy); margin-bottom: 1.5rem; }
+    .hero-coop-text p { color: var(--on-surface-var); font-size: 1.1rem; line-height: 1.6; }
+    
+    .hero-coop-btns { display: flex; flex-direction: column; gap: 1rem; align-items: flex-end; }
+    .btn-coop-action {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      padding: 1rem 2rem;
+      border-radius: 10px;
+      font-weight: 700;
+      width: 280px;
+      transition: var(--transition);
+      text-decoration: none;
+    }
+    .btn-coop-dark { background: var(--navy); color: #fff; box-shadow: 0 10px 30px rgba(10,29,55,0.2); }
+    .btn-coop-gold { background: var(--gold); color: #fff; box-shadow: 0 10px 30px rgba(197,160,89,0.2); }
+    .btn-coop-action svg { width: 20px; height: 20px; stroke: currentColor; fill: none; stroke-width: 2; }
+
+    /* Filter Bar */
+    .filter-section { border-top: 1px solid rgba(0,0,0,0.05); border-bottom: 1px solid rgba(0,0,0,0.05); padding: 1.5rem 0; background: #fff; margin-bottom: 3rem; }
+    .filter-inner { display: flex; align-items: center; justify-content: space-between; gap: 2rem; }
+    .filter-groups { display: flex; align-items: center; gap: 2rem; flex: 1; }
+    .filter-group { display: flex; align-items: center; gap: 0.75rem; }
+    .filter-label { font-size: 0.85rem; font-weight: 700; color: var(--on-surface-var); display: flex; align-items: center; gap: 0.5rem; }
+    .filter-select { border: none; font-size: 0.85rem; font-weight: 600; color: var(--navy); outline: none; background: transparent; cursor: pointer; padding-right: 1.5rem; background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='6 9 12 15 18 9'%3E%3C/polyline%3E%3C/svg%3E"); background-repeat: no-repeat; background-position: right center; background-size: 14px; appearance: none; }
+    .clear-filters { font-size: 0.8rem; font-weight: 700; color: var(--on-surface-var); opacity: 0.6; text-decoration: none; }
+
+    /* Main Feed & Sidebar */
+    .coop-layout { display: grid; grid-template-columns: 1.8fr 1fr; gap: 3rem; padding-bottom: 8rem; }
+    
+    /* Feed Cards */
+    .coop-card { background: #fff; border: 1px solid rgba(0,0,0,0.05); border-radius: 1rem; padding: 2.5rem; margin-bottom: 2rem; transition: var(--transition); }
+    .coop-card:hover { transform: translateY(-5px); box-shadow: 0 15px 40px rgba(0,0,0,0.04); }
+    .coop-card-top { display: flex; justify-content: space-between; align-items: center; margin-bottom: 1.5rem; }
+    .coop-badge { font-size: 0.65rem; font-weight: 800; color: var(--gold); text-transform: uppercase; letter-spacing: 0.1em; background: rgba(197,160,89,0.08); padding: 4px 10px; border-radius: 4px; }
+    .coop-time { font-size: 0.75rem; color: var(--on-surface-var); opacity: 0.6; }
+    .coop-card h3 { font-family: 'Manrope', sans-serif; font-size: 1.5rem; font-weight: 800; color: var(--navy); margin-bottom: 1rem; line-height: 1.3; }
+    .coop-profile { display: flex; align-items: center; gap: 0.75rem; margin-bottom: 1.5rem; }
+    .profile-av { width: 32px; height: 32px; border-radius: 50%; overflow: hidden; }
+    .profile-av img { width: 100%; height: 100%; object-fit: cover; }
+    .profile-info { font-size: 0.85rem; }
+    .profile-info strong { color: var(--navy); }
+    .profile-info span { color: var(--on-surface-var); opacity: 0.7; margin-left: 0.5rem; }
+    .coop-desc { font-size: 0.95rem; color: var(--on-surface-var); line-height: 1.7; margin-bottom: 2rem; }
+    .coop-actions { display: flex; gap: 1rem; }
+
+    /* Sidebar - Recommended Partners */
+    .sidebar-title { display: flex; align-items: center; gap: 0.75rem; font-size: 1.1rem; font-weight: 800; color: var(--navy); margin-bottom: 2rem; }
+    .sidebar-title svg { width: 20px; height: 20px; stroke: var(--gold); fill: none; stroke-width: 2; }
+    .partner-list { list-style: none; padding: 0; }
+    .partner-item { display: flex; gap: 1.25rem; margin-bottom: 2rem; }
+    .partner-av { width: 48px; height: 48px; border-radius: 12px; overflow: hidden; flex-shrink: 0; }
+    .partner-av img { width: 100%; height: 100%; object-fit: cover; }
+    .partner-info h4 { font-size: 0.95rem; color: var(--navy); margin-bottom: 0.25rem; }
+    .partner-info p { font-size: 0.75rem; color: var(--on-surface-var); opacity: 0.7; margin-bottom: 0.5rem; }
+    .partner-tags { display: flex; gap: 0.4rem; flex-wrap: wrap; }
+    .partner-tag { font-size: 0.65rem; font-weight: 700; color: var(--on-surface-var); background: #f1f5f9; padding: 2px 8px; border-radius: 4px; }
+
+    /* Newsletter */
+    .newsletter-section { background: #060e20; padding: 6rem 0; color: #fff; text-align: center; }
+    .newsletter-section h2 { font-family: 'Manrope', sans-serif; font-size: 1.8rem; font-weight: 800; margin-bottom: 1rem; }
+    .newsletter-section p { color: rgba(255,255,255,0.6); margin-bottom: 3rem; font-size: 1rem; }
+    .newsletter-form { max-width: 600px; margin: 0 auto; display: flex; gap: 1rem; background: rgba(255,255,255,0.05); padding: 0.5rem; border-radius: 12px; }
+    .newsletter-form input { flex: 1; background: transparent; border: none; padding: 1rem 1.5rem; color: #fff; font-size: 0.95rem; outline: none; }
+    .newsletter-form button { background: var(--gold); color: #fff; border: none; padding: 0 2rem; border-radius: 8px; font-weight: 700; cursor: pointer; transition: var(--transition); }
+    .newsletter-form button:hover { background: #b48d4a; }
+
+    /* Stats Bar */
+    .coop-stats { background: #fcfdfe; padding: 4rem 0; border-top: 1px solid rgba(0,0,0,0.05); }
+    .c-stats-grid { display: grid; grid-template-columns: repeat(4, 1fr); text-align: center; }
+    .c-stat-item h4 { font-family: 'Manrope', sans-serif; font-size: 1.8rem; font-weight: 800; color: var(--navy); margin-bottom: 0.25rem; }
+    .c-stat-item p { font-size: 0.75rem; font-weight: 700; color: var(--on-surface-var); text-transform: uppercase; letter-spacing: 0.1em; opacity: 0.6; }
+
+    @media(max-width:992px) {
+      .hero-coop-grid, .coop-layout, .c-stats-grid { grid-template-columns: 1fr; }
+      .hero-coop-btns { align-items: flex-start; }
+      .filter-groups { flex-wrap: wrap; gap: 1rem; }
+    }
+  </style>
+</head>
+<body>
+  <nav id="navbar">
+    <div class="nav-inner">
+      <a href="../index.html" class="logo">
+        <img src="../assets/img/logo.png" alt="VACEO Logo" class="logo-img">
+      </a>
+      <ul class="nav-links">
+        <li><a href="../index.html" class="nav-link">Trang chủ</a></li>
+        <li><a href="legacy.html" class="nav-link">Legacy</a></li>
+        <li><a href="knowledge.html" class="nav-link">Knowledge Hub</a></li>
+        <li><a href="alumni.html" class="nav-link">Alumni</a></li>
+        <li><a href="cooperation.html" class="nav-link active">Hợp tác</a></li>
+        <li><a href="news.html" class="nav-link">Sự kiện</a></li>
+      </ul>
+      <div class="nav-actions">
+        <a href="#" class="btn-outline-nav">Đăng nhập</a>
+      </div>
+      <button class="mobile-toggle" id="mobileToggle"><span></span><span></span><span></span></button>
+    </div>
+  </nav>
+
+  <section class="hero-coop">
+    <div class="container">
+      <div class="hero-coop-grid">
+        <div class="hero-coop-text">
+          <span class="label">GLOBAL EXECUTIVE HUB</span>
+          <h1>Trung tâm Hợp tác</h1>
+          <p>Kết nối với các nhà lãnh đạo, tìm kiếm cơ hội đầu tư chiến lược và mở rộng quy mô doanh nghiệp trong mạng lưới độc quyền của VCCI-Andrews.</p>
+        </div>
+        <div class="hero-coop-btns">
+          <a href="#" class="btn-coop-action btn-coop-dark">
+            <svg viewBox="0 0 24 24"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg>
+            Đăng nhu cầu kết nối
+          </a>
+          <a href="#" class="btn-coop-action btn-coop-gold">
+            <svg viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon></svg>
+            Đăng cơ hội đầu tư
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="filter-section">
+    <div class="container">
+      <div class="filter-inner">
+        <div class="filter-groups">
+          <div class="filter-label">
+            <svg style="width: 16px; height: 16px;" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="22 3 2 3 10 12.46 10 19 14 21 14 12.46 22 3"></polygon></svg>
+            Bộ lọc:
+          </div>
+          <div class="filter-group">
+            <select class="filter-select">
+              <option>Loại nhu cầu</option>
+              <option>Hợp tác</option>
+              <option>Đầu tư</option>
+            </select>
+          </div>
+          <div class="filter-group">
+            <select class="filter-select">
+              <option>Ngành</option>
+              <option>Công nghệ</option>
+              <option>Tài chính</option>
+              <option>Logistics</option>
+            </select>
+          </div>
+          <div class="filter-group">
+            <select class="filter-select">
+              <option>Khu vực</option>
+              <option>Hà Nội</option>
+              <option>TP. HCM</option>
+              <option>Quốc tế</option>
+            </select>
+          </div>
+          <div class="filter-group">
+            <select class="filter-select">
+              <option>Quy mô</option>
+              <option>SMB</option>
+              <option>Enterprise</option>
+            </select>
+          </div>
+          <div class="filter-group">
+            <select class="filter-select">
+              <option>Trạng thái</option>
+              <option>Đang mở</option>
+              <option>Đã kết nối</option>
+            </select>
+          </div>
+        </div>
+        <a href="#" class="clear-filters">Xóa tất cả</a>
+      </div>
+    </div>
+  </section>
+
+  <section class="container">
+    <div class="coop-layout">
+      <main class="coop-feed">
+        <div class="coop-card">
+          <div class="coop-card-top">
+            <span class="coop-badge" style="color: #3b82f6; background: rgba(59, 130, 246, 0.08);">PARTNER</span>
+            <span class="coop-time">Đăng 2 giờ trước</span>
+          </div>
+          <h3>Hợp tác phân phối giải pháp AI cho ngành Logistic toàn cầu</h3>
+          <div class="coop-profile">
+            <div class="profile-av"><img src="../assets/img/alumni_portraits_3_1778224567337.png" alt="User"></div>
+            <div class="profile-info"><strong>Nguyễn Minh Tuấn</strong><span>CEO GlobalTech</span></div>
+          </div>
+          <p class="coop-desc">Chúng tôi đang tìm kiếm đối tác chiến lược có kinh nghiệm tại thị trường Đông Nam Á để triển khai hệ thống quản lý vận tải thông minh dựa trên nền tảng AI và Big Data...</p>
+          <div class="coop-actions">
+            <a href="#" class="btn-navy">Quan tâm</a>
+            <a href="#" class="btn-outline">Liên hệ</a>
+          </div>
+        </div>
+
+        <div class="coop-card">
+          <div class="coop-card-top">
+            <span class="coop-badge">INVESTMENT</span>
+            <span class="coop-time">Đăng hôm qua</span>
+          </div>
+          <h3>Cơ hội đầu tư Series B cho chuỗi cung ứng nông sản sạch</h3>
+          <div class="coop-profile">
+            <div class="profile-av"><img src="../assets/img/alumni_portraits_5_1778224606368.png" alt="User"></div>
+            <div class="profile-info"><strong>Lê Thị Mai</strong><span>Founder AgriNet</span></div>
+          </div>
+          <p class="coop-desc">Cần huy động 5 triệu USD để mở rộng hệ thống kho lạnh và tối ưu hóa quy trình vận chuyển từ nông trại đến các siêu thị tại 12 tỉnh thành lớn...</p>
+          <div class="coop-actions">
+            <a href="#" class="btn-navy">Quan tâm</a>
+            <a href="#" class="btn-outline">Liên hệ</a>
+          </div>
+        </div>
+
+        <div class="coop-card">
+          <div class="coop-card-top">
+            <span class="coop-badge" style="color: #10b981; background: rgba(16, 185, 129, 0.08);">SUPPLIER</span>
+            <span class="coop-time">Đăng 3 ngày trước</span>
+          </div>
+          <h3>Cung cấp linh kiện điện tử chất lượng cao cho thị trường EU</h3>
+          <div class="coop-profile">
+            <div class="profile-av"><img src="../assets/img/alumni_portraits_2_1778224551134.png" alt="User"></div>
+            <div class="profile-info"><strong>Trần Hoàng Long</strong><span>GĐ SX TechCorp</span></div>
+          </div>
+          <p class="coop-desc">Sẵn sàng cung ứng số lượng lớn các bảng mạch điều khiển thông minh đạt chuẩn CE cho các doanh nghiệp sản xuất thiết bị gia dụng tại Châu Âu...</p>
+          <div class="coop-actions">
+            <a href="#" class="btn-navy">Quan tâm</a>
+            <a href="#" class="btn-outline">Liên hệ</a>
+          </div>
+        </div>
+      </main>
+
+      <aside class="coop-sidebar">
+        <div class="sidebar-title">
+          <svg viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon></svg>
+          Gợi ý đối tác phù hợp
+        </div>
+        <ul class="partner-list">
+          <li class="partner-item">
+            <div class="partner-av"><img src="../assets/img/alumni_portraits_1_1778224452143.png" alt="Partner"></div>
+            <div class="partner-info">
+              <h4>Phạm Anh Đức</h4>
+              <p>Chuyên gia Tài chính & M&A</p>
+              <div class="partner-tags">
+                <span class="partner-tag">Investment</span>
+                <span class="partner-tag">Strategy</span>
+              </div>
+            </div>
+          </li>
+          <li class="partner-item">
+            <div class="partner-av"><img src="../assets/img/alumni_portraits_2_1778224551134.png" alt="Partner"></div>
+            <div class="partner-info">
+              <h4>Vũ Minh Hùng</h4>
+              <p>Giám đốc Vận hành chuỗi retail</p>
+              <div class="partner-tags">
+                <span class="partner-tag">Logistics</span>
+                <span class="partner-tag">Operations</span>
+              </div>
+            </div>
+          </li>
+          <li class="partner-item">
+            <div class="partner-av"><img src="../assets/img/alumni_portraits_5_1778224606368.png" alt="Partner"></div>
+            <div class="partner-info">
+              <h4>Hoàng Thủy Tiên</h4>
+              <p>CTO Fintech Startup</p>
+              <div class="partner-tags">
+                <span class="partner-tag">AI</span>
+                <span class="partner-tag">Blockchain</span>
+              </div>
+            </div>
+          </li>
+        </ul>
+        <button class="btn-outline" style="width: 100%; justify-content: center; padding: 0.75rem;">Xem tất cả gợi ý</button>
+      </aside>
+    </div>
+  </section>
+
+  <section class="coop-stats">
+    <div class="container">
+      <div class="c-stats-grid">
+        <div class="c-stat-item">
+          <h4>500+</h4>
+          <p>Thành viên CEO</p>
+        </div>
+        <div class="c-stat-item">
+          <h4>1.2B$</h4>
+          <p>Giá trị kết nối</p>
+        </div>
+        <div class="c-stat-item">
+          <h4>24</h4>
+          <p>Quốc gia tham gia</p>
+        </div>
+        <div class="c-stat-item">
+          <h4>150+</h4>
+          <p>Cơ hội đầu tư</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="newsletter-section">
+    <div class="container">
+      <h2>Đăng ký nhận bản tin</h2>
+      <p>Nhận những thông tin mới nhất về thị trường và cơ hội kết nối từ mạng lưới VACEO.</p>
+      <div class="newsletter-form">
+        <input type="email" placeholder="Email của bạn">
+        <button>Đăng ký ngay</button>
+      </div>
+    </div>
+  </section>
+
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-grid">
+        <div class="footer-brand">
+          <div class="footer-logo">
+            <img src="../assets/img/logo.png" alt="VACEO Logo" class="footer-logo-img">
+          </div>
+          <p>Mạng lưới kết nối CEO VCCI-Andrews – Nơi hội tụ các nhà lãnh đạo bản lĩnh.</p>
+          <div class="footer-socials"><a href="#" class="social-btn">f</a><a href="#" class="social-btn">in</a><a href="#" class="social-btn">▶</a></div>
+        </div>
+        <div class="footer-col"><h4>Liên kết nhanh</h4><ul><li><a href="../index.html">Trang chủ</a></li><li><a href="legacy.html">Legacy</a></li><li><a href="knowledge.html">Knowledge Hub</a></li><li><a href="news.html">Sự kiện</a></li></ul></div>
+        <div class="footer-col"><h4>Hỗ trợ & Chính sách</h4><ul><li><a href="#">Liên hệ</a></li><li><a href="#">Chính sách bảo mật</a></li><li><a href="#">Điều khoản sử dụng</a></li><li><a href="#">Đăng nhập Hội viên</a></li></ul></div>
+        <div class="footer-col"><h4>Thông tin liên hệ</h4><ul class="contact-list"><li>📍 Số 9 Đào Duy Anh, Quận Đống Đa, Hà Nội</li><li>📞 +84 123 456 789</li><li>✉️ info@vaceo.network</li></ul></div>
+      </div>
+      <div class="footer-bottom"><p>© 2024 VCCI-Andrews Executive Network. All rights reserved.</p></div>
+    </div>
+  </footer>
+  <script src="../js/main.js"></script>
+</body>
+</html>
