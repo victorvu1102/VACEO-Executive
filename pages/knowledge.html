@@ -53,24 +53,42 @@
     .search-tags a { font-size: 0.75rem; color: var(--navy); text-decoration: none; font-weight: 600; }
     .search-tags a:hover { color: var(--gold); }
 
-    /* Filter Tabs */
-    .filter-tabs { display: flex; justify-content: center; gap: 1rem; margin: 4rem 0; }
+    /* Filter Tabs Redesign */
+    .filter-tabs { display: flex; justify-content: center; gap: 1.5rem; margin: 4rem 0; }
     .filter-tab {
       display: flex;
       align-items: center;
-      gap: 0.75rem;
-      padding: 0.75rem 1.5rem;
+      gap: 0.875rem;
+      padding: 1rem 2rem;
       background: #fff;
-      border: 1px solid rgba(0,0,0,0.05);
-      border-radius: 10px;
-      font-size: 0.9rem;
+      border: 1px solid #f1f5f9;
+      border-radius: 50px;
+      font-size: 0.9375rem;
       font-weight: 700;
-      color: var(--on-surface-var);
+      color: #64748b;
       cursor: pointer;
-      transition: var(--transition);
+      transition: all 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
+      text-decoration: none;
+      box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05);
     }
-    .filter-tab.active { background: var(--navy); color: #fff; border-color: var(--navy); box-shadow: 0 10px 20px rgba(10,29,55,0.1); }
-    .filter-tab svg { width: 18px; height: 18px; stroke: currentColor; fill: none; stroke-width: 2; }
+    .filter-tab:hover { 
+      transform: translateY(-2px); 
+      box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+      color: var(--navy);
+      border-color: var(--gold);
+    }
+    .filter-tab.active { 
+      background: var(--navy); 
+      color: #fff; 
+      border-color: var(--navy); 
+      box-shadow: 0 20px 25px -5px rgba(10, 29, 55, 0.2); 
+    }
+    .filter-tab svg { width: 20px; height: 20px; stroke: currentColor; fill: none; stroke-width: 2.5; }
+
+    /* Clickable Lecture Cards */
+    .lecture-card-link { text-decoration: none; display: block; height: 100%; }
+    .btn-learn-more { display: inline-flex; align-items: center; gap: 0.5rem; color: var(--gold); font-weight: 800; font-size: 0.8125rem; text-transform: uppercase; letter-spacing: 0.05em; transition: 0.3s; margin-top: 1rem; }
+    .lecture-card:hover .btn-learn-more { gap: 0.75rem; }
 
     /* Lecture Cards */
     .lectures { padding: 4rem 0; }
@@ -128,16 +146,13 @@
     /* Case Studies */
     .case-studies { padding: 4rem 0; }
     .case-grid { display: grid; grid-template-columns: 2fr 1fr; gap: 2rem; margin-top: 3rem; }
-    .case-card-main { background: #fff; border: 1px solid rgba(0,0,0,0.05); border-radius: 1.5rem; padding: 3rem; display: flex; flex-direction: column; }
-    .case-card-small { background: #fff; border: 1px solid rgba(0,0,0,0.05); border-radius: 1.5rem; padding: 2rem; margin-bottom: 2rem; }
-    .case-badge { font-size: 0.65rem; font-weight: 800; color: var(--gold); text-transform: uppercase; margin-bottom: 1.5rem; display: block; }
-    .case-card-main h3 { font-family: 'Manrope', sans-serif; font-size: 1.6rem; font-weight: 800; color: var(--navy); margin-bottom: 1rem; }
-    .case-card-main p { color: var(--on-surface-var); line-height: 1.6; margin-bottom: 2rem; }
-    .case-footer { display: flex; justify-content: space-between; align-items: center; margin-top: auto; }
-    .student-avatars { display: flex; }
-    .student-avatars img { width: 32px; height: 32px; border-radius: 50%; border: 2px solid #fff; margin-left: -8px; }
-    .student-avatars img:first-child { margin-left: 0; }
     .student-count { font-size: 0.75rem; color: var(--on-surface-var); margin-left: 0.5rem; font-weight: 600; }
+
+    /* Case Study Clickable */
+    .case-card-main, .case-card-small { cursor: pointer; transition: 0.3s; text-decoration: none; display: flex; flex-direction: column; }
+    .case-card-main:hover, .case-card-small:hover { border-color: var(--gold); transform: translateY(-5px); box-shadow: 0 10px 20px rgba(0,0,0,0.05); }
+    .case-card-small h4 { transition: 0.3s; }
+    .case-card-small:hover h4 { color: var(--gold); }
 
     /* Download List */
     .downloads { padding: 4rem 0 8rem; }
@@ -223,7 +238,7 @@
         <svg viewBox="0 0 24 24"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"></path><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"></path></svg>
         Case Study học viên
       </button>
-      <a href="#" class="filter-tab">
+      <a href="documents.html" class="filter-tab">
         <svg viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline><line x1="16" y1="13" x2="8" y2="13"></line><line x1="16" y1="17" x2="8" y2="17"></line><polyline points="10 9 9 9 8 9"></polyline></svg>
         Tài liệu học tập
       </a>
@@ -241,56 +256,66 @@
       </div>
       <div class="lecture-grid">
         <div class="lecture-card">
-          <div class="lecture-img" style="background-image: url('https://images.unsplash.com/photo-1460925895917-afdab827c52f?auto=format&fit=crop&q=80&w=1000');">
-            <span class="lecture-badge">LECTURE</span>
-          </div>
-          <div class="lecture-content">
-            <div class="lecture-tags">
-              <span class="lecture-tag">STRATEGY</span>
-              <span class="lecture-tag">DIGITAL</span>
+          <a href="course_strategy_digital.html" class="lecture-card-link">
+            <div class="lecture-img" style="background-image: url('https://images.unsplash.com/photo-1460925895917-afdab827c52f?auto=format&fit=crop&q=80&w=1000');">
+              <span class="lecture-badge">LECTURE</span>
             </div>
-            <h3>Chiến lược Tăng trưởng Bền vững trong Kỷ nguyên Số</h3>
-            <p>Phân tích các mô hình kinh doanh thích ứng và bền vững trong thị trường Việt Nam hiện nay.</p>
-            <div class="lecture-footer">
-              <div class="lecture-author">
-                <div class="author-av"><img src="../assets/img/alumni_portraits_3_1778224567337.png" alt="Dr. Robert Chen"></div>
-                <div class="author-info">
-                  <strong>Dr. Robert Chen</strong>
-                  <span>Senior Advisor</span>
+            <div class="lecture-content">
+              <div class="lecture-tags">
+                <span class="lecture-tag">STRATEGY</span>
+                <span class="lecture-tag">DIGITAL</span>
+              </div>
+              <h3>Chiến lược Tăng trưởng Bền vững trong Kỷ nguyên Số</h3>
+              <p>Phân tích các mô hình kinh doanh thích ứng và bền vững trong thị trường Việt Nam hiện nay.</p>
+              
+              <div class="btn-learn-more">Học ngay →</div>
+
+              <div class="lecture-footer">
+                <div class="lecture-author">
+                  <div class="author-av"><img src="../assets/img/alumni_portraits_3_1778224567337.png" alt="Dr. Robert Chen"></div>
+                  <div class="author-info">
+                    <strong>Dr. Robert Chen</strong>
+                    <span>Senior Advisor</span>
+                  </div>
+                </div>
+                <div class="lecture-actions">
+                  <span class="action-icon" title="Xem chi tiết">👁</span>
+                  <span class="action-icon" title="Tải xuống">⬇</span>
                 </div>
               </div>
-              <div class="lecture-actions">
-                <a href="lectures.html" class="action-icon" title="Xem chi tiết">👁</a>
-                <span class="action-icon" title="Tải xuống">⬇</span>
-              </div>
             </div>
-          </div>
+          </a>
         </div>
         <div class="lecture-card">
-          <div class="lecture-img" style="background-image: url('https://images.unsplash.com/photo-1552664730-d307ca884978?auto=format&fit=crop&q=80&w=1000');">
-            <span class="lecture-badge">REPORT</span>
-          </div>
-          <div class="lecture-content">
-            <div class="lecture-tags">
-              <span class="lecture-tag">LEADERSHIP</span>
-              <span class="lecture-tag">MINDFULNESS</span>
+          <a href="#" class="lecture-card-link">
+            <div class="lecture-img" style="background-image: url('https://images.unsplash.com/photo-1552664730-d307ca884978?auto=format&fit=crop&q=80&w=1000');">
+              <span class="lecture-badge">REPORT</span>
             </div>
-            <h3>Lãnh đạo Tỉnh thức: Từ Tư duy đến Hành động</h3>
-            <p>Cách thức xây dựng văn hóa doanh nghiệp dựa trên sự thấu cảm và hiệu quả công việc vượt trội.</p>
-            <div class="lecture-footer">
-              <div class="lecture-author">
-                <div class="author-av"><img src="../assets/img/alumni_portraits_5_1778224606368.png" alt="Ms. Anh Nguyễn"></div>
-                <div class="author-info">
-                  <strong>Ms. Anh Nguyễn</strong>
-                  <span>Executive Coach</span>
+            <div class="lecture-content">
+              <div class="lecture-tags">
+                <span class="lecture-tag">LEADERSHIP</span>
+                <span class="lecture-tag">MINDFULNESS</span>
+              </div>
+              <h3>Lãnh đạo Tỉnh thức: Từ Tư duy đến Hành động</h3>
+              <p>Cách thức xây dựng văn hóa doanh nghiệp dựa trên sự thấu cảm và hiệu quả công việc vượt trội.</p>
+              
+              <div class="btn-learn-more">Học ngay →</div>
+
+              <div class="lecture-footer">
+                <div class="lecture-author">
+                  <div class="author-av"><img src="../assets/img/alumni_portraits_5_1778224606368.png" alt="Ms. Anh Nguyễn"></div>
+                  <div class="author-info">
+                    <strong>Ms. Anh Nguyễn</strong>
+                    <span>Executive Coach</span>
+                  </div>
+                </div>
+                <div class="lecture-actions">
+                  <span class="action-icon">👁</span>
+                  <span class="action-icon">⬇</span>
                 </div>
               </div>
-              <div class="lecture-actions">
-                <span class="action-icon">👁</span>
-                <span class="action-icon">⬇</span>
-              </div>
             </div>
-          </div>
+          </a>
         </div>
       </div>
 
@@ -313,7 +338,7 @@
       <h2 class="section-title">Case Study học viên</h2>
       <p class="section-sub">Những bài học thực tế từ chính hành trình chuyển đổi của các lãnh đạo trong mạng lưới.</p>
       <div class="case-grid">
-        <div class="case-card-main">
+        <a href="documents.html" class="case-card-main">
           <span class="case-badge">FEATURED CASE STUDY</span>
           <h3>Tái cấu trúc Chuỗi cung ứng: Bài học từ tập đoàn X-Logistics</h3>
           <p>Làm thế nào một doanh nghiệp logistics truyền thống đã chuyển mình thành công nhờ mô hình data-driven chỉ trong 18 tháng.</p>
@@ -323,20 +348,20 @@
               <img src="../assets/img/alumni_portraits_2_1778224551134.png" alt="Student">
               <span class="student-count">+4</span>
             </div>
-            <a href="#" class="btn-navy" style="font-size: 0.8rem; padding: 0.75rem 1.5rem;">Chi tiết Case Study</a>
+            <div class="btn-navy" style="font-size: 0.8rem; padding: 0.75rem 1.5rem; border-radius: 8px;">Chi tiết Case Study</div>
           </div>
-        </div>
+        </a>
         <div class="case-sidebar">
-          <div class="case-card-small">
+          <a href="documents.html" class="case-card-small">
             <span class="case-badge">CASE STUDY</span>
             <h4 style="font-size: 1rem; color: var(--navy); margin-bottom: 0.5rem;">Chuyển đổi văn hóa tại TechCorp</h4>
             <p style="font-size: 0.85rem; color: var(--on-surface-var); line-height: 1.5;">Xây dựng đội ngũ gắn kết thông qua các giá trị cốt lõi mới.</p>
-          </div>
-          <div class="case-card-small">
+          </a>
+          <a href="documents.html" class="case-card-small">
             <span class="case-badge">CASE STUDY</span>
             <h4 style="font-size: 1rem; color: var(--navy); margin-bottom: 0.5rem;">Tài chính cho Start-up quy mô lớn</h4>
             <p style="font-size: 0.85rem; color: var(--on-surface-var); line-height: 1.5;">Quy trình gọi vốn Series B và quản trị dòng tiền hiệu quả.</p>
-          </div>
+          </a>
         </div>
       </div>
     </div>
@@ -344,18 +369,23 @@
 
   <section class="downloads">
     <div class="container">
-      <h2 class="section-title">Tài liệu tham khảo</h2>
-      <p class="section-sub">Báo cáo, biểu mẫu và các tài liệu hướng dẫn nhanh.</p>
+      <div style="display: flex; justify-content: space-between; align-items: flex-end; margin-bottom: 2rem;">
+        <div>
+          <h2 class="section-title" style="margin: 0;">Tài liệu tham khảo</h2>
+          <p style="margin-top: 0.5rem; color: var(--on-surface-var);">Báo cáo, biểu mẫu và các tài liệu hướng dẫn nhanh.</p>
+        </div>
+        <a href="documents.html" class="eco-link">Xem tất cả tài liệu →</a>
+      </div>
       <ul class="download-list">
         <li class="download-item">
           <div class="download-info">
             <div class="file-icon pdf">PDF</div>
             <div class="download-text">
-              <h4>Khung năng lực lãnh đạo 4.0</h4>
-              <p>PDF • 2.4 MB • Cập nhật 2 tuần trước</p>
+              <h4>Workshop: Con người là trái tim của doanh nghiệp</h4>
+              <p>PDF • 226 KB • Tài liệu đào tạo nội bộ</p>
             </div>
           </div>
-          <span class="action-icon">⬇</span>
+          <a href="viewer_heart_human.html" class="action-icon">👁</a>
         </li>
         <li class="download-item">
           <div class="download-info">
@@ -365,7 +395,7 @@
               <p>Excel • 1.1 MB • Đã tải 1,240 lần</p>
             </div>
           </div>
-          <span class="action-icon">⬇</span>
+          <a href="documents.html" class="action-icon">⬇</a>
         </li>
         <li class="download-item">
           <div class="download-info">
@@ -375,7 +405,7 @@
               <p>PDF • 1.8 MB • Chuẩn quốc tế IFRS</p>
             </div>
           </div>
-          <span class="action-icon">⬇</span>
+          <a href="documents.html" class="action-icon">⬇</a>
         </li>
       </ul>
     </div>

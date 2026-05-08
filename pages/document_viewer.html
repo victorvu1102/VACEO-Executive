@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Xem tài liệu | VACEO Knowledge Hub</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@300;400;500;600;700;800&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
+    <link rel="stylesheet" href="../css/style.css">
+    <style>
+        body { background-color: #0f172a; color: #f1f5f9; margin: 0; overflow: hidden; height: 100vh; display: flex; flex-direction: column; }
+        
+        /* Top Bar */
+        .viewer-header { background: #1e293b; padding: 0.75rem 1.5rem; display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid #334155; }
+        .back-btn { display: flex; align-items: center; gap: 0.5rem; color: #94a3b8; text-decoration: none; font-size: 0.875rem; font-weight: 600; transition: 0.3s; }
+        .back-btn:hover { color: #fff; }
+        
+        .doc-title-area { text-align: center; flex: 1; }
+        .doc-title-area h1 { font-size: 1rem; margin: 0; font-weight: 700; color: #fff; }
+        .doc-title-area p { font-size: 0.75rem; margin: 0.25rem 0 0; color: #94a3b8; }
+        
+        .viewer-actions { display: flex; gap: 0.75rem; }
+        .action-btn-circle { width: 36px; height: 36px; border-radius: 50%; background: #334155; display: flex; align-items: center; justify-content: center; color: #cbd5e1; border: none; cursor: pointer; transition: 0.3s; text-decoration: none; }
+        .action-btn-circle:hover { background: var(--gold); color: #fff; }
+
+        /* Main Viewer Area */
+        .viewer-main { flex: 1; display: grid; grid-template-columns: 1fr 320px; overflow: hidden; }
+        
+        .pdf-container { background: #334155; padding: 2rem; overflow-y: auto; display: flex; justify-content: center; position: relative; }
+        .pdf-embed { width: 100%; max-width: 900px; height: 100%; background: #fff; box-shadow: 0 20px 40px rgba(0,0,0,0.4); border: none; }
+        
+        /* Sidebar */
+        .viewer-sidebar { background: #1e293b; border-left: 1px solid #334155; padding: 2rem; overflow-y: auto; }
+        .sidebar-section { margin-bottom: 2.5rem; }
+        .sidebar-section h4 { font-size: 0.75rem; font-weight: 800; color: #64748b; text-transform: uppercase; letter-spacing: 0.1em; margin-bottom: 1.25rem; }
+        
+        .meta-list { list-style: none; padding: 0; }
+        .meta-row { margin-bottom: 1rem; font-size: 0.875rem; }
+        .meta-label { color: #64748b; display: block; margin-bottom: 0.25rem; font-size: 0.7rem; font-weight: 700; }
+        .meta-val { color: #f1f5f9; font-weight: 600; }
+        
+        .related-doc { display: flex; gap: 1rem; padding: 1rem 0; border-bottom: 1px solid #334155; text-decoration: none; align-items: center; }
+        .related-doc:last-child { border-bottom: none; }
+        .related-icon { width: 36px; height: 36px; border-radius: 6px; background: rgba(197,160,89,0.1); color: var(--gold); display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
+        .related-info h5 { margin: 0; font-size: 0.8125rem; color: #cbd5e1; line-height: 1.4; transition: 0.3s; }
+        .related-doc:hover h5 { color: var(--gold); }
+        
+        .upgrade-card { background: linear-gradient(135deg, #0a1d37 0%, #1e3a5f 100%); border-radius: 12px; padding: 1.5rem; border: 1px solid #334155; text-align: center; }
+        .upgrade-card h6 { font-size: 0.9rem; margin-bottom: 0.5rem; color: var(--gold); }
+        .upgrade-card p { font-size: 0.75rem; color: #94a3b8; margin-bottom: 1rem; line-height: 1.5; }
+
+        @media (max-width: 1100px) {
+            .viewer-main { grid-template-columns: 1fr; }
+            .viewer-sidebar { display: none; }
+        }
+
+        /* Fullscreen fallback */
+        .no-pdf { padding: 4rem; text-align: center; color: #94a3b8; }
+    </style>
+</head>
+<body>
+    <header class="viewer-header">
+        <a href="documents.html" class="back-btn">
+            <span class="material-symbols-outlined">arrow_back</span>
+            <span>Thư viện tài liệu</span>
+        </a>
+        <div class="doc-title-area">
+            <h1>Khung quản trị chiến lược theo mô hình Balanced Scorecard (BSC)</h1>
+            <p>Tài liệu nội bộ • PDF Document • 12 Trang</p>
+        </div>
+        <div class="viewer-actions">
+            <button class="action-btn-circle" title="In tài liệu"><span class="material-symbols-outlined">print</span></button>
+            <a href="#" class="action-btn-circle" title="Tải về" download><span class="material-symbols-outlined">download</span></a>
+            <button class="action-btn-circle" title="Chia sẻ"><span class="material-symbols-outlined">share</span></button>
+        </div>
+    </header>
+
+    <main class="viewer-main">
+        <section class="pdf-container">
+            <!-- PDF Viewer Embed -->
+            <iframe src="https://www.w3.org/WAI/ER/tests/xhtml/testfiles/resources/pdf/dummy.pdf#toolbar=0" class="pdf-embed">
+                <div class="no-pdf">
+                    <p>Trình duyệt của bạn không hỗ trợ xem PDF trực tiếp. Vui lòng tải về để xem.</p>
+                    <a href="#" class="btn-gold">Tải tài liệu</a>
+                </div>
+            </iframe>
+        </section>
+
+        <aside class="viewer-sidebar">
+            <div class="sidebar-section">
+                <h4>THÔNG TIN TÀI LIỆU</h4>
+                <div class="meta-list">
+                    <div class="meta-row">
+                        <span class="meta-label">TÁC GIẢ</span>
+                        <span class="meta-val">VCCI Andrews Experts</span>
+                    </div>
+                    <div class="meta-row">
+                        <span class="meta-label">DANH MỤC</span>
+                        <span class="meta-val">Chiến lược & Quy hoạch</span>
+                    </div>
+                    <div class="meta-row">
+                        <span class="meta-label">NGÀY PHÁT HÀNH</span>
+                        <span class="meta-val">12/10/2024</span>
+                    </div>
+                    <div class="meta-row">
+                        <span class="meta-label">DUNG LƯỢNG</span>
+                        <span class="meta-val">2.4 MB</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="sidebar-section">
+                <h4>TÀI LIỆU LIÊN QUAN</h4>
+                <a href="#" class="related-doc">
+                    <div class="related-icon"><span class="material-symbols-outlined" style="font-size: 18px;">description</span></div>
+                    <div class="related-info">
+                        <h5>Quy trình thẩm định đầu tư dự án</h5>
+                    </div>
+                </a>
+                <a href="#" class="related-doc">
+                    <div class="related-icon"><span class="material-symbols-outlined" style="font-size: 18px;">table_chart</span></div>
+                    <div class="related-info">
+                        <h5>Bảng tính dự báo dòng tiền 12 tháng</h5>
+                    </div>
+                </a>
+            </div>
+
+            <div class="upgrade-card">
+                <h6>Gói Hội viên Vàng</h6>
+                <p>Nâng cấp để truy cập trọn bộ hơn 5000+ tài liệu độc quyền.</p>
+                <a href="../index.html#join" class="btn-gold" style="padding: 0.5rem 1rem; font-size: 0.75rem;">Nâng cấp ngay</a>
+            </div>
+        </aside>
+    </main>
+
+    <!-- Premium Modal -->
+    <div class="modal-overlay" id="premiumModal">
+        <div class="premium-modal">
+            <div class="modal-header">
+                <button class="modal-close" onclick="closeModal()"><span class="material-symbols-outlined">close</span></button>
+                <span class="material-symbols-outlined">workspace_premium</span>
+                <h2>Nâng cấp Hội viên Vàng</h2>
+                <p>Tài liệu này dành riêng cho cộng đồng VIP của VACEO</p>
+            </div>
+            <div class="modal-body">
+                <div class="benefit-list">
+                    <div class="benefit-item"><span class="material-symbols-outlined">check_circle</span> Tải không giới hạn 5,000+ biểu mẫu</div>
+                    <div class="benefit-item"><span class="material-symbols-outlined">check_circle</span> Truy cập báo cáo phân tích độc quyền</div>
+                    <div class="benefit-item"><span class="material-symbols-outlined">check_circle</span> Tham gia Network cùng 200+ CEO</div>
+                </div>
+                <div class="modal-footer" style="display: flex; flex-direction: column; gap: 1rem;">
+                    <a href="../index.html#join" class="btn-gold" style="padding: 1rem; text-decoration: none; display: block; border-radius: 12px; font-weight: 800; color: #fff;">NÂNG CẤP NGAY</a>
+                    <button onclick="closeModal()" style="background: none; border: none; color: #94a3b8; font-weight: 600; cursor: pointer; font-size: 0.85rem;">Để sau</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function openModal() {
+            document.getElementById('premiumModal').classList.add('active');
+        }
+        function closeModal() {
+            document.getElementById('premiumModal').classList.remove('active');
+        }
+
+        // Attach to all download buttons
+        document.querySelectorAll('.action-btn-circle[title="Tải về"]').forEach(btn => {
+            btn.addEventListener('click', (e) => {
+                e.preventDefault();
+                openModal();
+            });
+        });
+
+        // Close on click outside
+        document.getElementById('premiumModal').addEventListener('click', (e) => {
+            if (e.target === document.getElementById('premiumModal')) closeModal();
+        });
+    </script>
+</body>
+</html>
